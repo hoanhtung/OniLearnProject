@@ -1,0 +1,2 @@
+class AnswerDetail < ApplicationRecord
+end
