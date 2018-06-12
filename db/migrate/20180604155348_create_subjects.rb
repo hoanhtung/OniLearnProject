@@ -3,7 +3,7 @@ class CreateSubjects < ActiveRecord::Migration[5.2]
     create_table :subjects do |t|
       t.string :name
       t.string :image
-      t.integer :category_id
+      t.belongs_to :category
       
       t.timestamps
     end

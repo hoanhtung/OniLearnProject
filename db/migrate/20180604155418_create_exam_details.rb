@@ -4,6 +4,8 @@ class CreateExamDetails < ActiveRecord::Migration[5.2]
       t.integer :exam_id
       t.integer :question_id
 
+      t.belongs_to :exam
+      t.belongs_to :question
       t.timestamps
     end
   end

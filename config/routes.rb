@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
+  devise_for :users
+  resources :users
+  # root to: 'users#index'
+  root to: "home#index"
+
   resources :exams
   resources :answer_details
   resources :exam_details
-  resources :users
+  # resources :users
   resources :answers
   resources :questions
   resources :courses
