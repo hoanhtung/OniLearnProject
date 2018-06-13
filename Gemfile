@@ -7,6 +7,9 @@ ruby '2.5.1'
 gem 'active_model_serializers'
 #user
 gem 'devise'
+gem 'omniauth-google-oauth2'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 gem 'firebase', '~> 0.2.8'
 
