@@ -1,22 +1,3 @@
 <h1>Hệ thống quản lý câu hỏi</h1>
-<%= link_to 'Đăng nhập với FB', '/users/auth/facebook'%> <br/>
-
-<%= link_to 'Đăng nhập với Google', '/users/auth/facebook'%>
-
-<%# 
-<fb:login-button 
-  scope="public_profile,email"
-  onlogin="checkLoginState();">
-</fb:login-button> %>
-
-<script>
-    function checkLoginState() {
-        FB.getLoginStatus(function(response) {
-            statusChangeCallback(response);
-        });
-    }
-    FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-});
-</script>
+<%= link_to 'Thêm câu hỏi', questions_path %>
 
