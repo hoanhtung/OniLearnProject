@@ -8,10 +8,17 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  config.secret_key = '3c7f16f35c96425bd8f3bd8029bf48ef15fe5259e79e8c9f35b49219beaae4106b9b19f4ade4f5fed193fa584ce22bcf050ab4109a01f3d5ec321f4c97822d08'
   
+  config.secret_key = '3c7f16f35c96425bd8f3bd8029bf48ef15fe5259e79e8c9f35b49219beaae4106b9b19f4ade4f5fed193fa584ce22bcf050ab4109a01f3d5ec321f4c97822d08'
+  # use OmniAuth::Builder do
+  #   provider :facebook, '210211376253284', '7011bad1297ca1dbfe4985343a4b0199',
+  #     client_options: {
+  #       site: 'https://graph.facebook.com/v3.0',
+  #       authorize_url: "https://www.facebook.com/v3.0/dialog/oauth"
+  #     }
+  # end
   config.omniauth :google_oauth2, '223052040125-k9qcas16v0gpsnhii0jsric5jdl9o5hj.apps.googleusercontent.com', 'KVuFcshvyPj482Rs8YmWXITZ', { scope: "userinfo.email,userinfo.profile" }
-  config.omniauth :facebook, '210211376253284', '7011bad1297ca1dbfe4985343a4b0199', { scope: "public_profile, email" }
+  config.omniauth :facebook,  ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_SECRET'], { scope: "public_profile, email" }
 
   # '210211376253284', '7011bad1297ca1dbfe4985343a4b0199'
   # ==> Controller configuration

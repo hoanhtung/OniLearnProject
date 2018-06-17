@@ -4,6 +4,8 @@ Rails.application.configure do
   # Code is not reloaded between requests.
   config.cache_classes = true
 
+  ENV['FACEBOOK_APP_ID'] = '210211376253284'
+  ENV['FACEBOOK_SECRET'] = '7011bad1297ca1dbfe4985343a4b0199'
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
