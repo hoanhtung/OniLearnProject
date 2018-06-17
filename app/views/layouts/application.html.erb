@@ -10,9 +10,13 @@
   </head>
 
   <body>
-    <%= current_user.name %> <br/>
-    <%= link_to 'Đăng nhập với FB', '/users/auth/facebook'%> <br/>
-    <%= link_to 'Đăng nhập với Google', '/users/auth/google_oauth2'%>
+    <% if user_signed_in? && !current_user.nil? %>
+      <%= current_user.name %> <br/>
+      <%= link_to "Đăng xuất", destroy_user_session_path, method: 'delete' %>
+    <% else %>
+      <%= link_to 'Đăng nhập với FB', '/users/auth/facebook'%> <br/>
+      <%= link_to 'Đăng nhập với Google', '/users/auth/google_oauth2'%>
+    <% end %> 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
