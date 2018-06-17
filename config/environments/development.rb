@@ -7,6 +7,8 @@ Rails.application.configure do
 
   ENV['FACEBOOK_APP_ID'] = '210211376253284'
   ENV['FACEBOOK_SECRET'] = '7011bad1297ca1dbfe4985343a4b0199'
+  ENV['GOOGLE_APP_ID'] = '223052040125-k9qcas16v0gpsnhii0jsric5jdl9o5hj.apps.googleusercontent.com'
+  ENV['GOOGLE_SECRET'] = 'KVuFcshvyPj482Rs8YmWXITZ'
 
   config.cache_classes = false
 

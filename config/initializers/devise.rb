@@ -17,7 +17,7 @@ Devise.setup do |config|
   #       authorize_url: "https://www.facebook.com/v3.0/dialog/oauth"
   #     }
   # end
-  config.omniauth :google_oauth2, '223052040125-k9qcas16v0gpsnhii0jsric5jdl9o5hj.apps.googleusercontent.com', 'KVuFcshvyPj482Rs8YmWXITZ', { scope: "userinfo.email,userinfo.profile" }
+  config.omniauth :google_oauth2, ENV['GOOGLE_APP_ID'], ENV['GOOGLE_SECRET'], { scope: "userinfo.email,userinfo.profile" }
   config.omniauth :facebook,  ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_SECRET'], { scope: "public_profile, email" }
 
   # '210211376253284', '7011bad1297ca1dbfe4985343a4b0199'

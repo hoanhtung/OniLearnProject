@@ -1,11 +1,13 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
+  config.action_mailer.default_url_options = { host: 'https://onilearn.herokuapp.com' }
   # Code is not reloaded between requests.
   config.cache_classes = true
 
   ENV['FACEBOOK_APP_ID'] = '210211376253284'
   ENV['FACEBOOK_SECRET'] = '7011bad1297ca1dbfe4985343a4b0199'
+  ENV['GOOGLE_APP_ID'] = '223052040125-k9qcas16v0gpsnhii0jsric5jdl9o5hj.apps.googleusercontent.com'
+  ENV['GOOGLE_SECRET'] = 'KVuFcshvyPj482Rs8YmWXITZ'
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
