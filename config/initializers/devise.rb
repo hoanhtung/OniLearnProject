@@ -18,7 +18,7 @@ Devise.setup do |config|
   #     }
   # end
   config.omniauth :google_oauth2, ENV['GOOGLE_APP_ID'], ENV['GOOGLE_SECRET'], { scope: "userinfo.email,userinfo.profile" }
-  config.omniauth :facebook,  ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_SECRET'], { scope: "public_profile, email" }
+  config.omniauth :facebook,  ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_SECRET'], { scope: "public_profile, email", info_fields: 'email' }
 
   # '210211376253284', '7011bad1297ca1dbfe4985343a4b0199'
   # ==> Controller configuration
