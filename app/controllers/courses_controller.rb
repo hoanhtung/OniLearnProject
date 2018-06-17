@@ -1,6 +1,14 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
 
+
+  def find_all_by_sub_id
+    @courses = Course.where(subject_id: params[:sub_id])
+    respond_to do |format|
+      format.json { render :json => {subjects: @courses}}
+    end
+  end
+
   # GET /courses
   # GET /courses.json
   def index

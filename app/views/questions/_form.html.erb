@@ -1,32 +1,40 @@
-<%= form_with(model: question, local: true) do |form| %>
-  <% if question.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
 
-      <ul>
-      <% question.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+
+<%= form_with(model: question, local: true) do |form| %>
+  <div class="field">
+    <%= form.label ('Chọn ngành') %>
+    <%= form.select :category_id, 
+    options_from_collection_for_select(Category.all, :id, :name), {},
+    {:onChange => "getSubjectByCateId(this.options[this.selectedIndex].value)"} %>
+  </div>
 
   <div class="field">
-    <%= form.label :content %>
+    <%= form.label ('Chọn môn') %>
+    <div id="subject_select">
+      <%= form.select :subject_id, '<option></option>', {prompt: '----------------'} %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label ('Chọn khóa học') %>
+    <div id="course_select">
+      <%= form.select :course_id, '<option></option>', {prompt: '----------------'} %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label ('Nội dung câu hỏi: ') %>
     <%= form.text_area :content %>
   </div>
-
-  <div class="field">
-    <%= form.label :mark %>
-    <%= form.text_field :mark %>
-  </div>
-
-  <div class="field">
-    <%= form.label :mark %>
-    <%= form.text_field :mark %>
-  </div>
-
+  <%= form.fields_for :answers, Answer.new do |ans| %>
+    <div class="field" id="answer_field">
+      <%= ans.label ('Câu trả lời: ') %>
+      <%= ans.text_area :content %>
+    </div>
+  <button type="button" onClick='appendNewAnswerInput()' id="add_answer_btn">+</button>
+  <% end %>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit('Tạo mới') %>
   </div>
 <% end %>
+

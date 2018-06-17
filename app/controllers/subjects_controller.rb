@@ -1,6 +1,13 @@
 class SubjectsController < ApplicationController
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
 
+  def find_all_by_cate_id
+    @subject = Subject.where(category_id: params[:cate_id])
+    respond_to do |format|
+      format.json { render :json => {subjects: @subject}}
+    end
+  end
+
   # GET /subjects
   # GET /subjects.json
   def index

@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
+gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
+gem 'boostrap-sass', '~> 0.0.2'
 #Api gems
 gem 'active_model_serializers'
 #user
