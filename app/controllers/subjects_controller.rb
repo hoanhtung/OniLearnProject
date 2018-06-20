@@ -11,12 +11,13 @@ class SubjectsController < ApplicationController
   # GET /subjects
   # GET /subjects.json
   def index
-    @subjects = Subject.all
+    @subjects = Subject.where(category_id: params[:category_id])
   end
 
   # GET /subjects/1
   # GET /subjects/1.json
   def show
+    @subject = Subject.find(params[:id])
   end
 
   # GET /subjects/new
@@ -31,8 +32,8 @@ class SubjectsController < ApplicationController
   # POST /subjects
   # POST /subjects.json
   def create
-    @subject = Subject.new(subject_params)
-
+    @category = Category.find(params[:category_id])
+    @subject = @category.subjects.create(subject_params)
     respond_to do |format|
       if @subject.save
         format.html { redirect_to @subject, notice: 'Subject was successfully created.' }

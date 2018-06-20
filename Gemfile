@@ -2,9 +2,13 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
+#image
+gem 'carrierwave', '~> 0.10.0'
+gem 'mini_magick', '~> 4.3'
 
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'boostrap-sass', '~> 0.0.2'
+gem 'bootstrap', '~> 4.0.0'
 #Api gems
 gem 'active_model_serializers'
 #user
