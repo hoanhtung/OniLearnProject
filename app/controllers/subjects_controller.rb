@@ -11,7 +11,8 @@ class SubjectsController < ApplicationController
   # GET /subjects
   # GET /subjects.json
   def index
-    @subjects = Subject.where(category_id: params[:category_id])
+    @category = Category.find(params[:category_id])
+    @subjects = Subject.where(category_id: @category.id)
   end
 
   # GET /subjects/1
@@ -22,11 +23,13 @@ class SubjectsController < ApplicationController
 
   # GET /subjects/new
   def new
+    @category = Category.find(params[:category_id])
     @subject = Subject.new
   end
 
   # GET /subjects/1/edit
   def edit
+    @subject = Subject.find(params[:id])
   end
 
   # POST /subjects
@@ -36,11 +39,11 @@ class SubjectsController < ApplicationController
     @subject = @category.subjects.create(subject_params)
     respond_to do |format|
       if @subject.save
-        format.html { redirect_to @subject, notice: 'Subject was successfully created.' }
+        format.html { redirect_to @category, notice: 'Subject was successfully created.' }
         format.json { render :show, status: :created, location: @subject }
       else
         format.html { render :new }
-        format.json { render json: @subject.errors, status: :unprocessable_entity }
+        format.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -48,13 +51,14 @@ class SubjectsController < ApplicationController
   # PATCH/PUT /subjects/1
   # PATCH/PUT /subjects/1.json
   def update
+    @category = Category.find(params[:category_id])
     respond_to do |format|
       if @subject.update(subject_params)
-        format.html { redirect_to @subject, notice: 'Subject was successfully updated.' }
+        format.html { redirect_to @category, notice: 'Subject was successfully updated.' }
         format.json { render :show, status: :ok, location: @subject }
       else
         format.html { render :edit }
-        format.json { render json: @subject.errors, status: :unprocessable_entity }
+        format.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end
   end

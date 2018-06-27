@@ -12,12 +12,14 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    @courses = Course.all
+    @subject = Subject.find(params[:subject_id])
+    @courses = Course.where(subject_id: @subject.id)
   end
 
   # GET /courses/1
   # GET /courses/1.json
   def show
+    # @course = Course.find(params[:id])
   end
 
   # GET /courses/new

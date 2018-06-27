@@ -5,14 +5,16 @@
   <%= @question.content %>
 </p>
 
-<p>
-  <strong>Mark:</strong>
-  <%= @question.mark %>
-</p>
 
 <p>
-  <strong>Mark:</strong>
-  <%= @question.mark %>
+  <strong>Câu trả lời:</strong> <br/>
+  <% @answers.each do |ans| %>
+    <%= ans.content %>
+    <%= ans.is_right %>
+    <br/>
+  <% end %>
+
+
 </p>
 
 <%= link_to 'Edit', edit_question_path(@question) %> |

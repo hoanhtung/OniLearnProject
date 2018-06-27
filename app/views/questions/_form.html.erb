@@ -23,16 +23,35 @@
   </div>
 
   <div class="field">
-    <%= form.label ('Nội dung câu hỏi: ') %>
+    <%= form.label ('Nội dung câu hỏi: ') %> <br/>
     <%= form.text_area :content %>
   </div>
+  <%= form.label ('Câu trả lời: ') %> <br/>
   <%= form.fields_for :answers, Answer.new do |ans| %>
     <div class="field" id="answer_field">
-      <%= ans.label ('Câu trả lời: ') %>
       <%= ans.text_area :content %>
+      <%= ans.check_box :is_right %>
     </div>
-  <button type="button" onClick='appendNewAnswerInput()' id="add_answer_btn">+</button>
   <% end %>
+  <%= form.fields_for :answers, Answer.new do |ans| %>
+    <div class="field" id="answer_field">
+      <%= ans.text_area :content %>
+      <%= ans.check_box :is_right %>
+    </div>
+  <% end %>
+    <%= form.fields_for :answers, Answer.new do |ans| %>
+    <div class="field" id="answer_field">
+      <%= ans.text_area :content %>
+      <%= ans.check_box :is_right %>
+    </div>
+  <% end %>
+    <%= form.fields_for :answers, Answer.new do |ans| %>
+    <div class="field" id="answer_field">
+      <%= ans.text_area :content %>
+      <%= ans.check_box :is_right %>
+    </div>
+  <% end %>
+  <button type="button" onClick='appendNewAnswerInput()' id="add_answer_btn">+</button>
   <div class="actions">
     <%= form.submit('Tạo mới') %>
   </div>

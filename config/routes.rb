@@ -11,10 +11,15 @@ Rails.application.routes.draw do
   resources :exam_details
   resources :questions
   # resources :users
-  resources :categories do
-    resources :subjects do
-      resources :courses
+  resources :categories, shallow: true do
+    resources :subjects, shallow: true do
+      resources :courses, shallow: true do
+        resources :questions do
+          resources :answers
+        end
+      end
     end
   end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
