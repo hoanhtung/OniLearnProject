@@ -5,8 +5,8 @@
 <table>
   <thead>
     <tr>
-      <th>Tên</th>
-      <th colspan="2"></th>
+      <th colspan="2">Tên</th>
+      <th colspan="3">Thao tác</th>
     </tr>
   </thead>
 
@@ -21,7 +21,7 @@
         <td><%= subject.name %></td>
         <td><%= link_to 'Xem chi tiết', subject_path(subject) %></td>
         <td><%= link_to 'Chỉnh sửa', edit_subject_path(subject) %></td>
-        <td><%= link_to 'Xem các chương', subject_courses_path(subject) %></td>
+        <td><%= link_to 'Xem các chủ đề', subject_courses_path(subject) %></td>
       </tr>
     <% end %>
   </tbody>

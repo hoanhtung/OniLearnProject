@@ -1,56 +1,34 @@
-
-
-<%= form_with(model: question, local: true) do |form| %>
+<%= form_with(model: [@course, question], local: true) do |form| %>
   <div class="field">
-    <%= form.label ('Chọn ngành') %>
-    <%= form.select :category_id, 
-    options_from_collection_for_select(Category.all, :id, :name), {},
-    {:onChange => "getSubjectByCateId(this.options[this.selectedIndex].value)"} %>
-  </div>
-
-  <div class="field">
-    <%= form.label ('Chọn môn') %>
-    <div id="subject_select">
-      <%= form.select :subject_id, '<option></option>', {prompt: '----------------'} %>
-    </div>
-  </div>
-
-  <div class="field">
-    <%= form.label ('Chọn khóa học') %>
-    <div id="course_select">
-      <%= form.select :course_id, '<option></option>', {prompt: '----------------'} %>
-    </div>
-  </div>
-
-  <div class="field">
-    <%= form.label ('Nội dung câu hỏi: ') %> <br/>
-    <%= form.text_area :content %>
+    Nội dung câu hỏi: <br/>
+    <%= form.text_area :content %> <br/>
   </div>
   <%= form.label ('Câu trả lời: ') %> <br/>
-  <%= form.fields_for :answers, Answer.new do |ans| %>
     <div class="field" id="answer_field">
-      <%= ans.text_area :content %>
-      <%= ans.check_box :is_right %>
+    <% if @action %>
+      <% question.answers.each do |item| %>
+        <%= form.fields_for :answers, Answer.new do |ans| %>
+            <div class="field">
+              <%= ans.text_area :content, value: item.content%>
+              <%= ans.check_box :is_right, checked: item.is_right %>
+            </div>
+          <% end %>
+      <% end %>
+    <% else %>
+        <%= form.fields_for :answers, Answer.new do |ans| %>
+          <div class="field">
+            <%= ans.text_area :content %>
+            <%= ans.check_box :is_right %>
+          </div>
+        <% end %>
+        <%= form.fields_for :answers, Answer.new do |ans| %>
+          <div class="field">
+            <%= ans.text_area :content %>
+            <%= ans.check_box :is_right %>
+          </div>
+        <% end %> 
+    <% end %>
     </div>
-  <% end %>
-  <%= form.fields_for :answers, Answer.new do |ans| %>
-    <div class="field" id="answer_field">
-      <%= ans.text_area :content %>
-      <%= ans.check_box :is_right %>
-    </div>
-  <% end %>
-    <%= form.fields_for :answers, Answer.new do |ans| %>
-    <div class="field" id="answer_field">
-      <%= ans.text_area :content %>
-      <%= ans.check_box :is_right %>
-    </div>
-  <% end %>
-    <%= form.fields_for :answers, Answer.new do |ans| %>
-    <div class="field" id="answer_field">
-      <%= ans.text_area :content %>
-      <%= ans.check_box :is_right %>
-    </div>
-  <% end %>
   <button type="button" onClick='appendNewAnswerInput()' id="add_answer_btn">+</button>
   <div class="actions">
     <%= form.submit('Tạo mới') %>

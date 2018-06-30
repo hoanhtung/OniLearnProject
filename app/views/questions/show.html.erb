@@ -8,14 +8,12 @@
 
 <p>
   <strong>Câu trả lời:</strong> <br/>
-  <% @answers.each do |ans| %>
+  <% @question.answers.each do |ans| %>
     <%= ans.content %>
     <%= ans.is_right %>
     <br/>
   <% end %>
-
-
 </p>
 
 <%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', questions_path %>
+<%= link_to 'Back', course_questions_path(@question.course_id) %>

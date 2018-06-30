@@ -24,6 +24,7 @@ class CoursesController < ApplicationController
 
   # GET /courses/new
   def new
+    @subject = Subject.find(params[:subject_id])
     @course = Course.new
   end
 
@@ -34,11 +35,11 @@ class CoursesController < ApplicationController
   # POST /courses
   # POST /courses.json
   def create
-    @course = Course.new(course_params)
-
+    @subject = Subject.find(params[:subject_id])
+    @course = @subject.courses.create(course_params)
     respond_to do |format|
       if @course.save
-        format.html { redirect_to @course, notice: 'Course was successfully created.' }
+        format.html { redirect_to subject_courses_path, notice: 'Course was successfully created.' }
         format.json { render :show, status: :created, location: @course }
       else
         format.html { render :new }

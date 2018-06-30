@@ -4,31 +4,33 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.all
+    @course = Course.find(params[:course_id])
+    @questions = Question.includes(:answers).where(course_id: @course.id)
   end
 
   # GET /questions/1
   # GET /questions/1.json
   def show
-    @answers = Answer.where(question_id: @question.id)
   end
 
   # GET /questions/new
   def new
+    @course = Course.find(params[:course_id])
     @question = Question.new
     @question.answers.build
   end
 
   # GET /questions/1/edit
   def edit
-    @answers = Answer.where(question_id: @question.id)
+    @action = 'edit'
+    # @answers = Answer.where(question_id: @question.id)
   end
 
   # POST /questions
   # POST /questions.json
   def create
-    @question = Question.new(question_params)
-
+    @course = Course.find(params[:course_id])
+    @question = @course.questions.create(question_params)
     respond_to do |format|
       if @question.save
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
@@ -44,7 +46,7 @@ class QuestionsController < ApplicationController
   # PATCH/PUT /questions/1.json
   def update
     respond_to do |format|
-      if @question.update(question_params)
+      if @question.update_attributes(question_params)
         format.html { redirect_to @question, notice: 'Question was successfully updated.' }
         format.json { render :show, status: :ok, location: @question }
       else

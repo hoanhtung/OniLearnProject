@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :exam_details
   # resources :users
   
-  resources :categories, shallow: true do
+  resources :categories, only: [:index, :edit, :update, :new, :create] , shallow: true do
     resources :subjects, shallow: true do
       resources :courses, shallow: true do
         resources :questions do

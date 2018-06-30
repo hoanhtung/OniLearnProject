@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2018_06_13_193139) do
   create_table "exam_details", force: :cascade do |t|
     t.integer "exam_id"
     t.integer "question_id"
+    t.decimal "mark_question"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["exam_id"], name: "index_exam_details_on_exam_id"
@@ -65,7 +66,6 @@ ActiveRecord::Schema.define(version: 2018_06_13_193139) do
 
   create_table "questions", force: :cascade do |t|
     t.text "content"
-    t.decimal "mark"
     t.integer "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

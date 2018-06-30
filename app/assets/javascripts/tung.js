@@ -33,12 +33,19 @@ function getCourseBySubId(id) {
     })
 }
 
-var new_answer_field = '<br><textarea name="question[answers_attributes][0][content]"></textarea>';
-var remove_answer_btn = '<button type="button">x</button>';
+var index = 1;
 function appendNewAnswerInput() {
-    $("#answer_field").append(new_answer_field);
-    $("#answer_field").append(remove_answer_btn);
+    index += 1;
+    var div = '<div class="field">';
+    var new_answer_field = '<textarea name="question[answers_attributes]['+ index +'][content]"></textarea>';
+    var checkbox_answer = '<input type="checkbox" value="1" name="question[answers_attributes][' + index + '][is_right]">';
+    var remove_answer_btn = '<button type="button" onclick="removeAnswerField(event)">x</button><br/>';
+    div += new_answer_field;
+    div += checkbox_answer;
+    div += remove_answer_btn;
+    div += '</div>';
+    $("#answer_field").append(div);
 }
-function removeAnswerField() {
-    
+function removeAnswerField(event) {
+    $(event.target).closest('.field').remove();
 }
