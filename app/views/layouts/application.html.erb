@@ -22,6 +22,7 @@
         <div>
           <% if user_signed_in? && !current_user.nil? %>
             <%= current_user.name %> <br/>
+            <%= current_user.email %> <br/>
             <%= link_to "Đăng xuất", destroy_user_session_path, method: 'delete' %>
           <% else %>
             <%= link_to 'Đăng nhập với FB', '/users/auth/facebook', class: "btn btn-outline-primary"%>
