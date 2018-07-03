@@ -20,22 +20,16 @@
          Logo
         </div>
         <div>
-          <% if user_signed_in? && !current_user.nil? %>
-            <%= current_user.name %> <br/>
-            <%= current_user.email %> <br/>
-            <%= link_to "Đăng xuất", destroy_user_session_path, method: 'delete' %>
-          <% else %>
-            <%= link_to 'Đăng nhập với FB', '/users/auth/facebook', class: "btn btn-outline-primary"%>
-            <%= link_to 'Đăng nhập với Google', '/users/auth/google_oauth2', class: "btn btn-outline-danger"%>
+          <% if admin_signed_in? && !current_admin.nil? %>
+            <%= current_admin.email %> <br/>
+            <%= link_to "Đăng xuất", destroy_admin_session_path, method: 'delete' %>
           <% end %> 
         </div>
       </nav>
-    </div>
-     
+    </div>    
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
-
-        <%= yield %>
+    <%= yield %>
     </div>
   </div>
   </body>
