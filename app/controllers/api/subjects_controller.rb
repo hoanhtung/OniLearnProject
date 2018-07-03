@@ -1,4 +1,4 @@
-class SubjectsController < ApplicationController
+class API::SubjectsController < ApplicationController
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
 
   def find_all_by_cate_id

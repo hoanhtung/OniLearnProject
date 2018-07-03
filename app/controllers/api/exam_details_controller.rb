@@ -1,4 +1,4 @@
-class ExamDetailsController < ApplicationController
+class API::ExamDetailsController < ApplicationController
   before_action :set_exam_detail, only: [:show, :edit, :update, :destroy]
 
   # GET /exam_details

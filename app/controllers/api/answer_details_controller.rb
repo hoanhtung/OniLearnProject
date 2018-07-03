@@ -1,4 +1,4 @@
-class AnswerDetailsController < ApplicationController
+class API::AnswerDetailsController < ApplicationController
   before_action :set_answer_detail, only: [:show, :edit, :update, :destroy]
 
   # GET /answer_details
