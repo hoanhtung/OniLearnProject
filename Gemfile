@@ -6,6 +6,8 @@ ruby '2.5.1'
 gem 'carrierwave', '~> 0.10.0'
 gem 'mini_magick', '~> 4.3'
 
+gem 'whenever', require: false
+
 #paginatable
 gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
