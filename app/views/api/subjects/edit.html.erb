@@ -1,0 +1,6 @@
+<h1>Editing Subject</h1>
+
+<%= render 'form', subject: @subject %>
+
+<%= link_to 'Show', subject_path(@subject) %> |
+<%= link_to 'Back', category_subjects_path(@subject.category_id) %>

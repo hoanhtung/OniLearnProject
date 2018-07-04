@@ -1,9 +1,31 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.smtp_settings = {
+    user_name:      'hoanhtungtest@gmail.com',
+    password:       'hoanhtung.xy',
+    domain:         'localhost:3000',
+    address:        'smtp.gmail.com',
+    port:           '587',
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
+  #API
+  config.debug_exception_response_format
+  #= :default/:api
+
+
+  ENV['FACEBOOK_APP_ID'] = '210211376253284'
+  ENV['FACEBOOK_SECRET'] = '7011bad1297ca1dbfe4985343a4b0199'
+  ENV['GOOGLE_APP_ID'] = '223052040125-k9qcas16v0gpsnhii0jsric5jdl9o5hj.apps.googleusercontent.com'
+  ENV['GOOGLE_SECRET'] = 'KVuFcshvyPj482Rs8YmWXITZ'
+
   config.cache_classes = false
 
   # Do not eager load code on boot.
