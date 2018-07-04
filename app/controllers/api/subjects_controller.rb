@@ -13,6 +13,10 @@ class API::SubjectsController < ApplicationController
   def index
     @category = Category.find(params[:category_id])
     @subjects = Subject.where(category_id: @category.id)
+    respond_to do |format|
+      format.html { render :index, locals: {category: @category}}
+      format.json { render json: @subjects}
+    end
   end
 
   # GET /subjects/1
@@ -51,10 +55,10 @@ class API::SubjectsController < ApplicationController
   # PATCH/PUT /subjects/1
   # PATCH/PUT /subjects/1.json
   def update
-    @category = Category.find(params[:category_id])
+    # @category = Category.find(params[:category_id])
     respond_to do |format|
       if @subject.update(subject_params)
-        format.html { redirect_to @category, notice: 'Subject was successfully updated.' }
+        format.html { render :index, notice: 'Subject was successfully updated.' }
         format.json { render :show, status: :ok, location: @subject }
       else
         format.html { render :edit }

@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   scope module: 'api' do
     get '/home', to: 'welcome#home'
     resources :users
-    resources :categories, only: [:index, :edit, :update, :new, :create] , shallow: true do
-      resources :subjects, shallow: true do
+    resources :categories, only: [:index, :edit, :update, :new, :create], shallow: true do
+      resources :subjects, only: [:index, :edit, :update, :new, :create], shallow: true do
         resources :courses, shallow: true do
           resources :questions do
             resources :answers
@@ -30,9 +30,9 @@ Rails.application.routes.draw do
     # resources :exam_details
     # resources :users
     resources :users
-    resources :categories, only: [:index, :edit, :update, :new, :create] , shallow: true do
-      resources :subjects, shallow: true do
-        resources :courses, shallow: true do
+    resources :categories, only: [:index, :update, :create], shallow: true do
+      resources :subjects, only: [:index, :show, :update, :create], shallow: true do
+        resources :courses, only: [:index, :show, :update, :create], shallow: true do
           resources :questions do
             resources :answers
           end
