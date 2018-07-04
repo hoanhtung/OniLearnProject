@@ -1,0 +1,27 @@
+<%= form_with(model: [@subject, course], local: true) do |form| %>
+  <% if course.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(course.errors.count, "error") %> prohibited this course from being saved:</h2>
+
+      <ul>
+      <% course.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    Tên chủ đề
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    Mô tả
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit("Thêm chủ đề") %>
+  </div>
+<% end %>

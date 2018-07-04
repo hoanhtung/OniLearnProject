@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Các môn học</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="2">Tên</th>
+      <th colspan="3">Thao tác</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @subjects.each do |subject| %>
+      <tr>
+        <td>
+          <% if subject.image? %>
+          <%= image_tag subject.image.thumb.url %>
+          <% end %>
+        </td>
+        <td><%= subject.name %></td>
+        <td><%= link_to 'Chỉnh sửa', edit_subject_path(subject) %></td>
+        <td><%= link_to 'Xem các chủ đề', subject_courses_path(subject) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @subjects, theme: 'twitter-bootstrap-4', outer_window: 3 %>
+
+<br>
+
+<%= link_to 'Thêm môn học', new_category_subject_path %> |
+<%= link_to 'Trở về', categories_path %>

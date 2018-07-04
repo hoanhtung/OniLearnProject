@@ -1,3 +1,9 @@
 class User < ApplicationRecord
-    has_many :exams
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and 
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
+  has_many :exams
+
 end

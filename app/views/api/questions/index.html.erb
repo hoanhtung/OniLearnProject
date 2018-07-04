@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Questions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nội dung</th>
+      <th colspan="3">Thao tác</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= question.content %></td>
+        <td><%= link_to 'Xem câu trả lời', question_path(question) %></td>
+        <td><%= link_to 'Chỉnh sửa', edit_question_path(question) %></td>
+        <td><%= link_to 'Xóa', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Question', new_course_question_path %>
