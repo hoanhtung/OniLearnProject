@@ -22,7 +22,6 @@ class API::SubjectsController < ApplicationController
   # GET /subjects/1
   # GET /subjects/1.json
   def show
-    @subject = Subject.find(params[:id])
   end
 
   # GET /subjects/new
