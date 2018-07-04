@@ -4,10 +4,10 @@
     # GET /categories
     # GET /categories.json
     def index
-      @categories = Category.all
+      @categories = Category.all.page(params[:page]).per(5)
       respond_to do |format|
-          format.html 
-          format.json { render json: @categories}
+        format.html 
+        format.json { render json: @categories}
       end
     end
 
@@ -32,7 +32,7 @@
       respond_to do |format|
         if @category.save
           format.html { redirect_to categories_path, notice: 'Category was successfully created.' }
-          format.json { render @category, status: :created, location: @category }
+          format.json { render :show, status: :created, location: @category }
         else
           format.html { render :new }
           format.json { render json: @category.errors, status: :unprocessable_entity }

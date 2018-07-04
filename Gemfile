@@ -6,6 +6,10 @@ ruby '2.5.1'
 gem 'carrierwave', '~> 0.10.0'
 gem 'mini_magick', '~> 4.3'
 
+#paginatable
+gem 'kaminari'
+gem 'bootstrap4-kaminari-views'
+
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'boostrap-sass', '~> 0.0.2'
 gem 'bootstrap', '~> 4.0.0'

@@ -20,7 +20,7 @@
     <% end %>
   </tbody>
 </table>
-
+<%= paginate @categories, theme: 'twitter-bootstrap-4', outer_window: 3 %>
 <br>
 
 <%= link_to 'Thêm chuyên ngành', new_category_path %>

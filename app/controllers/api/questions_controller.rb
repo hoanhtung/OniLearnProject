@@ -6,6 +6,10 @@ class API::QuestionsController < ApplicationController
   def index
     @course = Course.find(params[:course_id])
     @questions = Question.includes(:answers).where(course_id: @course.id)
+    respond_to do |format|
+      format.html
+      format.json { render json: @questions }
+    end
   end
 
   # GET /questions/1

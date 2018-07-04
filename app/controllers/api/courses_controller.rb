@@ -14,6 +14,10 @@ class API::CoursesController < ApplicationController
   def index
     @subject = Subject.find(params[:subject_id])
     @courses = Course.where(subject_id: @subject.id)
+    respond_to do |format|
+      format.html
+      format.json { render json: @courses}
+    end
   end
 
   # GET /courses/1

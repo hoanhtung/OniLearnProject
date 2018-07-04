@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
 
   scope module: 'api' do
+    
+    concern :paginatable do
+      get '(page/:page)', action: :index, on: :collection, as: ''
+    end
+
     get '/home', to: 'welcome#home'
     resources :users
-    resources :categories, only: [:index, :edit, :update, :new, :create], shallow: true do
-      resources :subjects, only: [:index, :edit, :update, :new, :create], shallow: true do
+    resources :categories, concerns: :paginatable, only: [:index, :edit, :update, :new, :create], shallow: true do
+      resources :subjects, concerns: :paginatable, only: [:index, :edit, :update, :new, :create], shallow: true do
         resources :courses, shallow: true do
           resources :questions do
             resources :answers
@@ -30,7 +35,7 @@ Rails.application.routes.draw do
     # resources :exam_details
     # resources :users
     resources :users
-    resources :categories, only: [:index, :update, :create], shallow: true do
+    resources :categories, only: [:index, :show, :update, :create], shallow: true do
       resources :subjects, only: [:index, :show, :update, :create], shallow: true do
         resources :courses, only: [:index, :show, :update, :create], shallow: true do
           resources :questions do

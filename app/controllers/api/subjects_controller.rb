@@ -12,7 +12,7 @@ class API::SubjectsController < ApplicationController
   # GET /subjects.json
   def index
     @category = Category.find(params[:category_id])
-    @subjects = Subject.where(category_id: @category.id)
+    @subjects = Subject.where(category_id: @category.id).page(params[:page]).per(5)
     respond_to do |format|
       format.html { render :index, locals: {category: @category}}
       format.json { render json: @subjects}
@@ -43,8 +43,8 @@ class API::SubjectsController < ApplicationController
     @subject = @category.subjects.create(subject_params)
     respond_to do |format|
       if @subject.save
-        format.html { redirect_to @category, notice: 'Subject was successfully created.' }
-        format.json { render :show, status: :created, location: @subject }
+        format.html { redirect_to category_subjects_path, notice: 'Subject was successfully created.' }
+        format.json { render category_subjects, status: :created, location: @subject }
       else
         format.html { render :new }
         format.json { render json: @category.errors, status: :unprocessable_entity }
@@ -58,8 +58,8 @@ class API::SubjectsController < ApplicationController
     # @category = Category.find(params[:category_id])
     respond_to do |format|
       if @subject.update(subject_params)
-        format.html { render :index, notice: 'Subject was successfully updated.' }
-        format.json { render :show, status: :ok, location: @subject }
+        format.html { redirect_to category_subjects_path(@subject.category_id), notice: 'Subject was successfully updated.' }
+        format.json { render :index, status: :ok, location: @subject }
       else
         format.html { render :edit }
         format.json { render json: @category.errors, status: :unprocessable_entity }
