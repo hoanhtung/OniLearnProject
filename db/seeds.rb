@@ -5,9 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-# category = Category.create([{ name: 'Kỹ thuật phần mềm'}]);
-# category = Category.create([{ name: 'Kinh doanh quốc tế'}]);
-# category = Category.create([{ name: 'Thiết kế đồ họa'}]);
+category = Category.create([{ name: 'Kỹ thuật phần mềm'}]);
+category = Category.create([{ name: 'Kinh doanh quốc tế'}]);
+category = Category.create([{ name: 'Thiết kế đồ họa'}]);
 
 subject = Subject.create([{ name: 'C++', category_id: 1}])
 subject = Subject.create([{ name: 'C##', category_id: 1}])

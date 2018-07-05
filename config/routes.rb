@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
-
+  devise_for :admins , only: [:sessions], :controllers => {
+    sessions: "admins/sessions"
+  }
+  root to: redirect('/admins/sign_in')
+  # root to: 'api/welcome#home'
+  
   scope module: 'api' do
-    
+    #routes cho phân trang page/1
     concern :paginatable do
       get '(page/:page)', action: :index, on: :collection, as: ''
     end
@@ -44,13 +49,6 @@ Rails.application.routes.draw do
         end
       end
     end
-  end
-
-  devise_for :admins, :controllers => {
-    sessions: "admins/sessions"
-  }
-  authenticated :admins do
-    root to: 'admins/sessions#new'
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
