@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   devise_for :admins , only: [:sessions], :controllers => {
     sessions: "admins/sessions"
   }
-  root to: redirect('/admins/sign_in')
-  # root to: 'api/welcome#home'
+  # root to: redirect('/admins/sign_in')
+  root to: 'api/welcome#home'
   
   scope module: 'api' do
     #routes cho phân trang page/1

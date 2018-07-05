@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
-    before_action :authenticate_admin!
+    # before_action :authenticate_admin!
     
     # skip_before_action :verify_authenticity_token
     def after_sign_in_path_for(resource_or_scope)
@@ -12,6 +12,6 @@ class ApplicationController < ActionController::Base
     end
 
     def after_sign_out_path_for(resource_or_scope)
-        new_admin_session_path #tam
+        root_path #tam
     end
 end

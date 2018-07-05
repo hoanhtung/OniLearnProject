@@ -1,11 +1,13 @@
 <%= form_with(model: [@course, question], local: true) do |form| %>
+
   <div class="field">
     Nội dung câu hỏi: <br/>
     <%= form.text_area :content %> <br/>
   </div>
+
   <%= form.label ('Câu trả lời: ') %> <br/>
     <div class="field" id="answer_field">
-    <% if @action %>
+    <% if @action %> <%# load edit answer%>
       <% question.answers.each do |item| %>
         <%= form.fields_for :answers, Answer.new do |ans| %>
             <div class="field">

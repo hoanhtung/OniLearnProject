@@ -13,16 +13,18 @@
   <div class="container-fluid">
     <div class="row">
       <nav class="navbar navbar-light" style="width: 100%">
-       <div>
-         Menu
+        <div>
+        <%= link_to 'Menu', root_path %>
         </div>
-         <div>
+        <div>
          Logo
         </div>
         <div>
           <% if admin_signed_in? && !current_admin.nil? %>
             <%= current_admin.email %> <br/>
             <%= link_to "Đăng xuất", destroy_admin_session_path, method: 'delete' %>
+          <% else %>
+            <%= link_to "Đăng nhập", new_admin_session_path %>
           <% end %> 
         </div>
       </nav>
