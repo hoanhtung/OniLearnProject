@@ -10,8 +10,8 @@ Rails.application.routes.draw do
     concern :paginatable do
       get '(page/:page)', action: :index, on: :collection, as: ''
     end
-
     get '/home', to: 'welcome#home'
+    get '/subjects', to: 'subjects#show_newest'
     resources :users
     resources :categories, concerns: :paginatable, only: [:index, :edit, :update, :new, :create], shallow: true do
       resources :subjects, concerns: :paginatable, only: [:index, :edit, :update, :new, :create], shallow: true do
@@ -35,6 +35,9 @@ Rails.application.routes.draw do
     # end
     get '/find_by_category_id', to: 'subjects#find_all_by_cate_id'
     get '/find_by_subject_id', to: 'courses#find_all_by_sub_id'
+
+    get '/subjects', to: 'subjects#show_newest'
+    get '/subjects', to: 'subjects#show_newest'
     # resources :exams
     # resources :answer_details
     # resources :exam_details

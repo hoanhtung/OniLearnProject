@@ -28,6 +28,7 @@
 <%= paginate @subjects, theme: 'twitter-bootstrap-4', outer_window: 3 %>
 
 <br>
-
-<%= link_to 'Thêm môn học', new_category_subject_path %> |
-<%= link_to 'Trở về', categories_path %>
+<% if !@action %>
+  <%= link_to 'Thêm môn học', new_category_subject_path %> |
+  <%= link_to 'Trở về', categories_path %>
+<% end %>

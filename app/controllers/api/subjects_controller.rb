@@ -8,6 +8,15 @@ class API::SubjectsController < ApplicationController
     end
   end
 
+  def show_newest
+    @subjects = Subject.all.newest.page(params[:page]).per(5)
+    @action = 'show_newest'
+    respond_to do |format|
+      format.html { render :index}
+      format.json { render json: @subjects}
+    end
+  end
+
   # GET /subjects
   # GET /subjects.json
   def index

@@ -4,11 +4,18 @@
     # GET /categories
     # GET /categories.json
     def index
-      @categories = Category.all.page(params[:page]).per(5)
+      @categories = Category.includes(:subjects).all.page(params[:page]).per(5)
+      ActiveRecord::Base.include_root_in_json = true
+      @categories.to_json(:include => :subjects)
       respond_to do |format|
         format.html 
-        format.json { render json: @categories}
+        format.json { render json: @categories.to_json(:include => :subjects)}
       end
+    end
+
+    def load_categories_subjects
+      @categories = Category.include(:subjects).all
+      render json: @categories
     end
 
     # GET /categories/1
