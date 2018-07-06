@@ -8,7 +8,7 @@ class API::QuestionsController < ApplicationController
     @questions = Question.includes(:answers).where(course_id: @course.id)
     respond_to do |format|
       format.html
-      format.json { render json: @questions }
+      format.json { render json: @questions.to_json(:include => :answers) }
     end
   end
 
@@ -53,8 +53,11 @@ class API::QuestionsController < ApplicationController
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
   def update
+    @question.answers.delete_all
+    # @answers = @question.answers.find(params[:question][:answers_attributes])
     respond_to do |format|
-      if @question.update_attributes(question_params)
+      if @question.update_attributes(question_params) 
+        # && @question.answers.find()update_attributes(answer_params)
         format.html { redirect_to @question, notice: 'Question was successfully updated.' }
         format.json { render :show, status: :ok, location: @question }
       else
@@ -83,5 +86,11 @@ class API::QuestionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
       params.require(:question).permit(:content, :course_id, answers_attributes: [:id, :content, :is_right])
+    end
+    def answer_params
+      params.require(:answer).permit(:content, :is_right)
+    end
+    def question_update_params
+      params.require(:question).permit(:content)
     end
 end

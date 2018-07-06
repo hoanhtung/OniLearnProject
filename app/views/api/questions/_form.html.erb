@@ -11,8 +11,9 @@
       <% question.answers.each do |item| %>
         <%= form.fields_for :answers, Answer.new do |ans| %>
             <div class="field">
-              <%= ans.text_area :content, value: item.content%>
+              <%= ans.text_area :content, value: item.content %>
               <%= ans.check_box :is_right, checked: item.is_right %>
+              <button type="button" onclick="removeAnswerField(event)">x</button><br/>
             </div>
           <% end %>
       <% end %>
