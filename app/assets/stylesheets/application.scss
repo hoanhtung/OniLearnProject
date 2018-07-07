@@ -13,4 +13,9 @@
  *= require_tree .
  *= require_self
  */
- @import "bootstrap";
+//  @import "bootstrap";
+ @import "bootstrap-min";
+ @import "adminLTE.css";
+ @import "font-awesome.css";
+ @import "ionicons.css";
+ @import "allSkins.css";
