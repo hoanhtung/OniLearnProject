@@ -17,4 +17,8 @@
 //= require popper
 //= require bootstrap
 //= require bootstrap-sprockets
-//= require_tree .
+//= require jquery
+//= require jquery-ui
+//= require wysihtml5
+//= require adminLTE
+// = require_tree .
