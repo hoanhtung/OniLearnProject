@@ -3,6 +3,11 @@
   <div class="field">
     Nội dung câu hỏi: <br/>
     <%= form.text_area :content %> <br/>
+    Loại:
+    <%= form.radio_button(:multichoice, "true", checked: true) %>
+    Multichoice
+    <%= form.radio_button(:multichoice, "false") %>
+    True/False <br/>
   </div>
 
   <%= form.label ('Câu trả lời: ') %> <br/>

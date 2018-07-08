@@ -1,8 +1,15 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Content:</strong>
-  <%= @question.content %>
+  <strong>Nội dung:</strong>
+  <%= @question.content %> <br/>
+  <strong>Loại:</strong>
+  <%= @question.multichoice %>
+  <% if @question.multichoice == true %>
+    Multichoice
+  <% else %>
+    True/False
+  <% end %>
 </p>
 
 

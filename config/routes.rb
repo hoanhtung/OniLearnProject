@@ -36,8 +36,13 @@ Rails.application.routes.draw do
     get '/find_by_category_id', to: 'subjects#find_all_by_cate_id'
     get '/find_by_subject_id', to: 'courses#find_all_by_sub_id'
 
+    #subjects
     get '/subjects', to: 'subjects#show_newest'
-    get '/subjects', to: 'subjects#show_newest'
+    #questions
+    get '/multichoice_questions', to: 'questions#load_multichoice_questions'
+    get '/true_false_questions', to: 'questions#load_true_false_questions'
+    get '/random_questions/:amount', to: 'questions#load_random_questions'
+    
     # resources :exams
     # resources :answer_details
     # resources :exam_details

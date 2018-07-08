@@ -1,6 +1,21 @@
 class API::QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
+
+  def load_multichoice_questions
+    @questions = Question.load_multichoice
+    render json: @questions
+  end
+  def load_true_false_questions
+    @questions = Question.load_true_false
+    render json: @questions
+  end
+  def load_random_questions
+    @questions = Question.load_random(params[:amount])
+    # @questions = Question.offset(rand(Question.count)).limit()
+    render json: @questions
+  end
+
   # GET /questions
   # GET /questions.json
   def index
@@ -85,7 +100,7 @@ class API::QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:content, :course_id, answers_attributes: [:id, :content, :is_right])
+      params.require(:question).permit(:content, :multichoice, :course_id, answers_attributes: [:id, :content, :is_right])
     end
     def answer_params
       params.require(:answer).permit(:content, :is_right)
