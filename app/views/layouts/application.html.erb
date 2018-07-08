@@ -28,10 +28,20 @@
           <% end %> 
         </div>
       </nav>
-    </div>    
+    </div>  
+    <div class="row">
+      <div class="col-md-3">
+        <%= link_to 'Xem tất cả chuyên ngành', categories_path %> <br/>
+        <%= link_to "Xem tất cả các môn học", subjects_path  %> <br/>
+        <%= link_to 'Danh sách người dùng', users_path %> <br/>
+      </div>
+      <div class="col-md-9">
+        <%= yield %>
+      </div>
+    </div>  
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
-    <%= yield %>
+
     </div>
   </div>
   </body>

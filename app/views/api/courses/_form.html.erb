@@ -10,7 +10,10 @@
       </ul>
     </div>
   <% end %>
-
+  <div class="field">
+    <%= form.label :icon %>
+    <%= form.file_field :icon %>
+  </div>
   <div class="field">
     Tên chủ đề
     <%= form.text_field :name %>
