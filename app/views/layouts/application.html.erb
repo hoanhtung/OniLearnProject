@@ -274,7 +274,7 @@
             <% else %>
               <li class="dropdown user user-menu">
                 <%= link_to "Đăng nhập", new_admin_session_path, 
-                class: "btn btn-block btn-flat" %>
+                class: "btn-flat" %>
               </li>
             <% end %> 
           </ul>
@@ -340,33 +340,7 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <section class="content-header">
-        <h1>
-          Dashboard
-          <small>Control panel</small>
-        </h1>
-        <ol class="breadcrumb">
-          <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-          <li class="active">Dashboard</li>
-        </ol>
-      </section>
-
-      <!-- Main content -->
-      <section>
-
-        <div class="container-fluid">
-        <div class="row">
-          <nav class="navbar navbar-light" style="width: 100%">
-          </nav>
-        </div>    
-          <p class="notice"><%= notice %></p>
-          <p class="alert"><%= alert %></p>
-        <%= yield %>
-        </div>          
-
-      </section>
-      <!-- /.content -->
+      <%= yield %>
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
