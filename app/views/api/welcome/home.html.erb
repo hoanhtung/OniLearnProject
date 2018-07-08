@@ -1,7 +1,35 @@
-<h1>Hệ thống quản lý câu hỏi</h1>
-<%= link_to 'Xem tất cả chuyên ngành', categories_path %> <br/>
-<%= link_to "Xem tất cả các môn học", subjects_path  %> <br/>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    OniLearn
+    <small>Quản lý</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+  </ol>
+</section>
 
-<%= link_to 'Danh sách người dùng', users_path %> <br/>
-
-
+<!-- Main content -->
+<section class="content">   
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Tác vụ chính</h3>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <%= link_to categories_path, class: "btn btn-app" do %>
+                    <i class="fa fa-play"></i>
+                    Quản lý chuyên ngành
+                <% end %>
+                <%= link_to subjects_path, class: "btn btn-app" do %>
+                    <i class="fa fa-play"></i>
+                    Quản lý môn học
+                <% end %>
+                <%= link_to users_path, class: "btn btn-app" do %>
+                    <i class="fa fa-play"></i>
+                    Quản lý người dùng
+                <% end %>
+            </div>
+        </div>
+    </div>
+</section>
