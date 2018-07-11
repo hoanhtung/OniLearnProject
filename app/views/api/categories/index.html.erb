@@ -24,7 +24,7 @@
         <thead>
           <tr>
             <th style="width: 10%">#</th>
-            <th style="width: 50%; text-align: center">Tên</th>
+            <th style="width: 50%; text-align: left">Tên</th>
             <th style="text-align: right">Tác vụ</th>
            </tr>
         </thead>
@@ -32,7 +32,7 @@
         <tbody>
           <% @categories.each do |category| %>
             <tr>
-              <td>1</td>
+              <td><%= category.id %></td>
               <td><%= category.name %></td>
               <td style="text-align: right">
                 <%= link_to 'Xem', category_subjects_path(category), class: "btn btn-sm btn-default" %>
