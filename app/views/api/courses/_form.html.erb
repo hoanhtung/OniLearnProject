@@ -24,6 +24,14 @@
     <%= form.text_area :description %>
   </div>
 
+  <div class="field">
+    Loại câu hỏi
+    <%= form.radio_button(:type_course, "true", checked: true) %>
+    Multichoice
+    <%= form.radio_button(:type_course, "false") %>
+    True/False <br/>
+  </div>
+
   <div class="actions">
     <%= form.submit("Thêm chủ đề") %>
   </div>

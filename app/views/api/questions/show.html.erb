@@ -4,10 +4,12 @@
   <strong>Nội dung:</strong>
   <%= @question.content %> <br/>
   <strong>Loại:</strong>
-  <%= @question.multichoice %>
-  <% if @question.multichoice == true %>
+  <%= @question.type_question %>
+  <% if @question.type_question == 2 %>
     Multichoice
-  <% else %>
+  <% elsif @question.type_question.nil?  %>
+    N/A
+  <%else%>
     True/False
   <% end %>
 </p>

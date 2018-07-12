@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Nội dung</th>
+      <th>Loại câu hỏi</th>
       <th colspan="3">Thao tác</th>
     </tr>
   </thead>
@@ -14,6 +15,15 @@
     <% @questions.each do |question| %>
       <tr>
         <td><%= question.content %></td>
+        <td>
+            <% if question.type_question == 2 %>
+              Multichoice
+            <% elsif question.type_question.nil?  %>
+              N/A
+            <%else%>
+              True/False
+            <% end %>
+        </td>
         <td><%= link_to 'Xem câu trả lời', question_path(question) %></td>
         <td><%= link_to 'Chỉnh sửa', edit_question_path(question) %></td>
         <td><%= link_to 'Xóa', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>

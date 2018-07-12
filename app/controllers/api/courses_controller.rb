@@ -47,7 +47,7 @@ class API::CoursesController < ApplicationController
   def update
     respond_to do |format|
       if @course.update(course_params)
-        format.html { redirect_to @course, notice: 'Course was successfully updated.' }
+        format.html { redirect_to subject_courses_path(@course.subject.id), notice: 'Course was successfully updated.' }
         format.json { render :show, status: :ok, location: @course }
       else
         format.html { render :edit }
@@ -62,7 +62,7 @@ class API::CoursesController < ApplicationController
   #     format.html { redirect_to courses_url, notice: 'Course was successfully destroyed.' }
   #     format.json { head :no_content }
   #   end
-  end
+  # end
 
   private
     def set_course
@@ -70,6 +70,6 @@ class API::CoursesController < ApplicationController
     end
 
     def course_params
-      params.require(:course).permit(:name, :description, :icon)
+      params.require(:course).permit(:name, :description, :type_course, :icon)
     end
 end

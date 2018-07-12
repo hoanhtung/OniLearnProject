@@ -4,10 +4,12 @@
     Nội dung câu hỏi: <br/>
     <%= form.text_area :content %> <br/>
     Loại:
-    <%= form.radio_button(:multichoice, "true", checked: true) %>
-    Multichoice
-    <%= form.radio_button(:multichoice, "false") %>
-    True/False <br/>
+    <%= form.radio_button(:type_question, "0", checked: true) %>
+    True
+    <%= form.radio_button(:type_question, "1") %>
+    False
+    <%= form.radio_button(:type_question, "2") %>
+    Multichoice <br/>
   </div>
 
   <%= form.label ('Câu trả lời: ') %> <br/>

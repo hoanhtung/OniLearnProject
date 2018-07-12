@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2018_07_03_084225) do
   create_table "courses", force: :cascade do |t|
     t.string "name"
     t.text "description"
+    t.boolean "type_course"
     t.string "icon"
     t.integer "subject_id"
     t.datetime "created_at", null: false
@@ -85,7 +86,7 @@ ActiveRecord::Schema.define(version: 2018_07_03_084225) do
 
   create_table "questions", force: :cascade do |t|
     t.text "content"
-    t.boolean "multichoice"
+    t.integer "type_question"
     t.integer "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -6,28 +6,38 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 admin = Admin.create([{ email: "hoanhtung.xy@gmail.com", password: "123456!!"}])
-category = Category.create([{ name: 'Kỹ thuật phần mềm'}]);
-category = Category.create([{ name: 'Kinh doanh quốc tế'}]);
-category = Category.create([{ name: 'Thiết kế đồ họa'}]);
+category = Category.create([{ name: 'Lớp 1'}]);
+category = Category.create([{ name: 'Lớp 2'}]);
+category = Category.create([{ name: 'Lớp 3'}]);
+category = Category.create([{ name: 'Lớp 4'}]);
+category = Category.create([{ name: 'Lớp 5'}]);
+category = Category.create([{ name: 'Lớp 6'}]);
 
-subject = Subject.create([{ name: 'C++', category_id: 1}])
-subject = Subject.create([{ name: 'C##', category_id: 1}])
-subject = Subject.create([{ name: 'HCI', category_id: 1}])
-subject = Subject.create([{ name: 'ACC', category_id: 2}])
-subject = Subject.create([{ name: 'GUI', category_id: 3}])
+subject = Subject.create([{ name: 'Đạo đức', category_id: 1}])
+subject = Subject.create([{ name: 'Tiếng việt', category_id: 1}])
+subject = Subject.create([{ name: 'Khoa học', category_id: 1}])
+subject = Subject.create([{ name: 'Chính tả', category_id: 2}])
+subject = Subject.create([{ name: 'KHXH', category_id: 2}])
+subject = Subject.create([{ name: 'Vẽ', category_id: 2}])
+subject = Subject.create([{ name: 'Tiếng việt', category_id: 3}])
+subject = Subject.create([{ name: 'Địa lý', category_id: 4}])
+subject = Subject.create([{ name: 'Lịch sử', category_id: 5}])
+subject = Subject.create([{ name: 'Hình học', category_id: 6}])
+subject = Subject.create([{ name: 'Đại số', category_id: 6}])
+
 
 for i in 0..5
-    course = Course.create([{ name: "Chapter 0 #{i} C++", subject_id: 1 }])
+    course = Course.create([{ name: "Đạo đức 0#{i} C++", subject_id: 1 }])
 end
 for i in 0..5
-    course = Course.create([{ name: "Chapter 0 #{i} C##", subject_id: 2 }])
+    course = Course.create([{ name: "Tiếng việt 0#{i} C##", subject_id: 2 }])
 end
 for i in 0..5
-    course = Course.create([{ name: "Chapter 0 #{i} HCI", subject_id: 3 }])
+    course = Course.create([{ name: "Khoa học 0#{i} HCI", subject_id: 3 }])
 end
 for i in 0..5
-    course = Course.create([{ name: "Chapter 0 #{i} ACC", subject_id: 4 }])
+    course = Course.create([{ name: "Chính tả 0#{i} ACC", subject_id: 4 }])
 end
 for i in 0..5
-    course = Course.create([{ name: "Chapter 0 #{i} GUI", subject_id: 5 }])
+    course = Course.create([{ name: "KHXH 0#{i} GUI", subject_id: 5 }])
 end
