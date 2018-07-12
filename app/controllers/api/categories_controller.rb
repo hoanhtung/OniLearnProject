@@ -1,10 +1,10 @@
   class API::CategoriesController < ApplicationController
     before_action :set_category, only: [:show, :edit, :update, :destroy]
-
+    before_action :authenticate_admin!, only: [:new, :create, :edit, :update]
     # GET /categories
     # GET /categories.json
     def index
-      @categories = Category.all.page(params[:page]).per(5)
+      @categories = Category.all.newest.page(params[:page]).per(5)
       respond_to do |format|
         format.html 
         format.json { render json: @categories.to_json(:include => :subjects)}

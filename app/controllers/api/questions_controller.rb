@@ -1,6 +1,6 @@
 class API::QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_admin!, only: [:new, :create, :edit, :update]
 
   def load_multichoice_questions
     @questions = Question.load_multichoice

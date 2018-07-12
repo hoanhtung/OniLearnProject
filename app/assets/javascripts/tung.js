@@ -1,4 +1,7 @@
-
+//Notify all
+function notifyAll(notice) {
+    $.notify(notice, {className: "success", position: "bottom center"});
+  }
 function getSubjectByCateId(id) {
     $.ajax({
         url: '/find_by_category_id',

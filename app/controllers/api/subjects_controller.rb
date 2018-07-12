@@ -1,6 +1,7 @@
 class API::SubjectsController < ApplicationController
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_admin!, only: [:new, :create, :edit, :update]
+  
   def find_all_by_cate_id
     @subject = Subject.where(category_id: params[:cate_id])
     respond_to do |format|
@@ -9,7 +10,7 @@ class API::SubjectsController < ApplicationController
   end
 
   def show_newest
-    @subjects = Subject.all.newest.page(params[:page]).per(5)
+    @subjects = Subject.joins(:category).all.newest.page(params[:page]).per(5)
     @action = 'show_newest'
     respond_to do |format|
       format.html { render :index}
