@@ -1,12 +1,9 @@
 <%= form_with(model: @category, local: true) do |form| %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="modal-body form-group">
+      <b>Tên chuyên ngành</b>
+      <%= form.text_field :name, class: 'form-control' %>
   </div>
-
-  <div class="actions">
-    <%= form.submit('Tạo mới') %>
+  <div class="modal-footer actions">
+    <button class="btn btn-default">Tạo mới</button>
   </div>
 <% end %>
-

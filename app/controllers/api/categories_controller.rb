@@ -1,6 +1,7 @@
   class API::CategoriesController < ApplicationController
     before_action :set_category, only: [:show, :edit, :update, :destroy]
     before_action :authenticate_admin!, only: [:new, :create, :edit, :update]
+    layout false, only: [:new, :edit]
 
     def index
       @categories = Category.all.newest.page(params[:page]).per(5)
@@ -20,10 +21,10 @@
 
     def new
       @category = Category.new
-      render :index
     end
 
     def edit
+      @category = Category.find(params[:id])
     end
 
     def create

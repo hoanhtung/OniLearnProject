@@ -1,6 +1,7 @@
 class API::SubjectsController < ApplicationController
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!, only: [:new, :create, :edit, :update]
+  layout false, only: [:new, :edit]
   
   def find_all_by_cate_id
     @subject = Subject.where(category_id: params[:cate_id])
@@ -10,7 +11,7 @@ class API::SubjectsController < ApplicationController
   end
 
   def show_newest
-    @subjects = Subject.joins(:category).all.newest.page(params[:page]).per(5)
+    @subjects = Subject.all.newest.page(params[:page]).per(5).joins(:category)
     @action = 'show_newest'
     respond_to do |format|
       format.html { render :index}
@@ -18,8 +19,6 @@ class API::SubjectsController < ApplicationController
     end
   end
 
-  # GET /subjects
-  # GET /subjects.json
   def index
     @category = Category.find(params[:category_id])
     @subjects = Subject.where(category_id: @category.id).page(params[:page]).per(5)
@@ -29,24 +28,17 @@ class API::SubjectsController < ApplicationController
     end
   end
 
-  # GET /subjects/1
-  # GET /subjects/1.json
   def show
   end
 
-  # GET /subjects/new
   def new
     @category = Category.find(params[:category_id])
     @subject = Subject.new
   end
 
-  # GET /subjects/1/edit
   def edit
-    @subject = Subject.find(params[:id])
   end
 
-  # POST /subjects
-  # POST /subjects.json
   def create
     @category = Category.find(params[:category_id])
     @subject = @category.subjects.create(subject_params)

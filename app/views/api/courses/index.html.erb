@@ -37,7 +37,7 @@
             N/A
           <% end %>
         </td>
-        <td><%= course.subject_id %></td>
+        <td><%= course.subject.name %></td>
         <td><%= course.questions.all.size %></td>
         <% if admin_signed_in? && !current_admin.nil? %>
           <td><%= link_to 'Chỉnh sửa', edit_course_path(course) %></td>

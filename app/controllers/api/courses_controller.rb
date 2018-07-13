@@ -1,7 +1,7 @@
 class API::CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!, only: [:new, :create, :edit, :update]
-
+  layout false, only: [:new, :edit]
   def find_all_by_sub_id
     @courses = Course.where(subject_id: params[:sub_id])
     respond_to do |format|
@@ -11,7 +11,7 @@ class API::CoursesController < ApplicationController
 
   def index
     @subject = Subject.find(params[:subject_id])
-    @courses = Course.where(subject_id: @subject.id)
+    @courses = Course.where(subject_id: @subject.id).joins(:subject)
     respond_to do |format|
       format.html
       format.json { render json: @courses}
