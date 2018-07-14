@@ -1,7 +1,4 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Các chủ đề</h1>
-
 <table>
   <thead>
     <tr>
@@ -47,6 +44,9 @@
     <% end %>
   </tbody>
 </table>
+<%= paginate @courses, theme: 'twitter-bootstrap-4', outer_window: 3 %>
 <br>
-<%= link_to 'Thêm chủ đề', new_subject_course_path, class: 'btn btn-sm btn-primary', data: {toggle: 'modal', target: '#modal'} %>
+<% if @action != 'show_newest' %>
+  <%= link_to 'Thêm chủ đề', new_subject_course_path, class: 'btn btn-sm btn-primary', data: {toggle: 'modal', target: '#modal'} %>
+<% end %>
 

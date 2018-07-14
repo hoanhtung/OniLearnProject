@@ -18,6 +18,15 @@ class API::CoursesController < ApplicationController
     end
   end
 
+  def show_newest
+    @courses = Course.all.page(params[:page]).per(5).joins(:subject)
+    @action = 'show_newest'
+    respond_to do |format|
+      format.html { render :index}
+      format.json { render json: @courseS}
+    end
+  end
+
   def show
   end
 

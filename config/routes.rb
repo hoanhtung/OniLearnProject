@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     end
     get '/home', to: 'welcome#home'
     get '/subjects', to: 'subjects#show_newest'
+    get '/courses', to: 'courses#show_newest'
     get '/new_subject', to: 'subjects#new_subject' #category ko có sẵn
     post '/subjects', to: 'subjects#create_subject' #category ko có sẵn
     resources :users
@@ -40,6 +41,8 @@ Rails.application.routes.draw do
 
     #subjects
     get '/subjects', to: 'subjects#show_newest'
+    #course
+    get '/courses', to: 'courses#show_newest'
     #questions
     get '/multichoice_questions', to: 'questions#load_multichoice_questions'
     get '/true_false_questions', to: 'questions#load_true_false_questions'
