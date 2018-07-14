@@ -8,6 +8,11 @@
     <%= form.file_field :image %>
   </div>
   <div class="modal-footer actions">
-    <button class="btn btn-default">Tạo mới</button>
+    <% if @action == 'new' %>
+      <button class="btn btn-default">Tạo mới</button>
+    <% end %>
+    <% if @action == 'edit' %>
+      <button class="btn btn-default">Cập nhật</button>
+    <% end %>
   </div>
 <% end %>

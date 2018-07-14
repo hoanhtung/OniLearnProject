@@ -1,6 +1,6 @@
 //Notify all
 function notifyAll(notice) {
-    $.notify(notice, {className: "success", position: "bottom center"});
+    $.notify(notice, {className: "success", position: "top center"});
   }
 function getSubjectByCateId(id) {
     $.ajax({

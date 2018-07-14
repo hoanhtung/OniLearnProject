@@ -21,10 +21,12 @@
 
     def new
       @category = Category.new
+      @action = 'new'
     end
 
     def edit
       @category = Category.find(params[:id])
+      @action = 'edit'
     end
 
     def create

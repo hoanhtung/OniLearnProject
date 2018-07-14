@@ -34,9 +34,11 @@ class API::SubjectsController < ApplicationController
   def new
     @category = Category.find(params[:category_id])
     @subject = Subject.new
+    @action = 'new'
   end
 
   def edit
+    @action = 'edit'
   end
 
   def create

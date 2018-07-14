@@ -26,7 +26,7 @@
         <td><%= subject.category.name %></td>
         <td><%= subject.courses.all.size %></td>
         <% if admin_signed_in? && !current_admin.nil? %>
-          <td><%= link_to 'Chỉnh sửa', edit_subject_path(subject), class: 'btn btn-sm btn-default', data: {toggle: 'modal', target: '#newSubjectModal'} %></td>
+          <td><%= link_to 'Chỉnh sửa', edit_subject_path(subject), class: 'btn btn-sm btn-default', data: {toggle: 'modal', target: '#modal'} %></td>
         <% end %>
         <td><%= link_to 'Xem các chủ đề', subject_courses_path(subject), class: 'btn btn-sm btn-default' %></td>
       </tr>
@@ -40,18 +40,6 @@ ko phụ thuộc vào 1 category nào -->
 <% if @action == 'show_newest'%> 
   <%= link_to 'Thêm môn học', '#', class: 'btn btn-sm btn-primary', data: {toggle: 'modal', target: '#newSubjectModal'} %> |
 <% else %>
-  <%= link_to 'Thêm môn học', new_category_subject_path, class: 'btn btn-sm btn-primary', data: {toggle: 'modal', target: '#newSubjectModal'} %> |
+  <%= link_to 'Thêm môn học', new_category_subject_path, class: 'btn btn-sm btn-primary', data: {toggle: 'modal', target: '#modal'} %> |
 <% end %>
 <%= link_to 'Trở về', categories_path %>
-
-  <div class="container">
-    <!-- Modal create category -->
-    <div class="modal fade" id="newSubjectModal" role="dialog">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-header">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>

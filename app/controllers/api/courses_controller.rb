@@ -19,15 +19,16 @@ class API::CoursesController < ApplicationController
   end
 
   def show
-    # @course = Course.find(params[:id])
   end
 
   def new
     @subject = Subject.find(params[:subject_id])
     @course = Course.new
+    @action = 'new'
   end
 
   def edit
+    @action = 'edit'
   end
 
   def create

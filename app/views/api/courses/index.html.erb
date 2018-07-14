@@ -40,16 +40,13 @@
         <td><%= course.subject.name %></td>
         <td><%= course.questions.all.size %></td>
         <% if admin_signed_in? && !current_admin.nil? %>
-          <td><%= link_to 'Chỉnh sửa', edit_course_path(course) %></td>
+          <td><%= link_to 'Chỉnh sửa', edit_course_path(course), class: 'btn btn-sm btn-default', data: {toggle: 'modal', target: '#modal'} %></td>
         <% end %>
         <td><%= link_to 'Xem các câu hỏi', course_questions_path(course) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
 <br>
-
-<%= link_to 'Thêm chủ đề', new_subject_course_path %>
-<%= link_to 'Trở về', category_subjects_path(@subject.category_id) %>
+<%= link_to 'Thêm chủ đề', new_subject_course_path, class: 'btn btn-sm btn-primary', data: {toggle: 'modal', target: '#modal'} %>
 
