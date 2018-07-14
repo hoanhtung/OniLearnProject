@@ -1,14 +1,30 @@
 <%= form_with(model: [@category, subject], local: true) do |form| %>
   <div class="modal-body form-group">
-    <%= form.label :name %>
+    <b> Chuyên ngành: </b>
+    <% if @action == 'new' %>
+      <%= @category.name %><br/>
+    <% end %>
+    <% if @action == 'edit' %>
+      <%= form.select "category_id", options_from_collection_for_select(Category.all, :id, :name, "#{subject.category_id}") %>
+    <% end %>
+    <% if @action == 'new_subject' %>
+      <br/>
+      <%= form.select "category_id", options_from_collection_for_select(Category.all, :id, :name), {prompt: '-----Chọn chuyện ngành-----'} %>
+    <% end %>
+  </div>
+  <div class="modal-body form-group">
+    <b> Tên môn học </b>
     <%= form.text_field :name %>
   </div>
   <div class="modal-body form-group">
-    <%= form.label :image %>
+    <b> Hình đại diện </b>
     <%= form.file_field :image %>
   </div>
   <div class="modal-footer actions">
-    <% if @action == 'new' %>
+    <% if @action == 'new'%>
+      <button class="btn btn-default">Tạo mới</button>
+    <% end %>
+    <% if @action == 'new_subject' %>
       <button class="btn btn-default">Tạo mới</button>
     <% end %>
     <% if @action == 'edit' %>

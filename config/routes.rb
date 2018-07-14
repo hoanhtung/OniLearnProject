@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     end
     get '/home', to: 'welcome#home'
     get '/subjects', to: 'subjects#show_newest'
+    get '/new_subject', to: 'subjects#new_subject' #category ko có sẵn
+    post '/subjects', to: 'subjects#create_subject' #category ko có sẵn
     resources :users
     resources :categories, concerns: :paginatable, only: [:index, :edit, :update, :new, :create], shallow: true do
       resources :subjects, concerns: :paginatable, only: [:index, :edit, :update, :new, :create], shallow: true do
@@ -23,7 +25,7 @@ Rails.application.routes.draw do
       end
     end
   end
-  
+  #API
   scope module: 'api', path: 'api', defaults: {format: :json} do
     # devise_for :users , :controllers => {
     #   :omniauth_callbacks => "api/user/omniauth_callbacks",

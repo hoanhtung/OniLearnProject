@@ -1,12 +1,17 @@
-<h1>Các môn học</h1>
-
+<h1>
+  <% if @action != 'show_newest' %>
+    <%= @category.name %>/
+  <% end %>
+  Các môn học
+</h1>
 <table>
   <thead>
     <tr>
-      <th colspan="1">#</th>
+      <th>#</th>
       <th colspan="2">Tên</th>
-      <th colspan="1">Chuyên ngành</th>
-      <th colspan="1">Số chủ đề</th>
+      <th>Ngày tạo</th>
+      <th>Chuyên ngành</th>
+      <th>Số chủ đề</th>
       <th colspan="3">Thao tác</th>
     </tr>
   </thead>
@@ -23,12 +28,13 @@
           <% end %>
         </td>        
         <td><%= subject.name %></td>
+        <td><%= subject.created_at.strftime("%b %d, %Y") %></td>
         <td><%= subject.category.name %></td>
         <td><%= subject.courses.all.size %></td>
+        <td><%= link_to 'Xem các chủ đề', subject_courses_path(subject), class: 'btn btn-sm btn-default' %></td>
         <% if admin_signed_in? && !current_admin.nil? %>
           <td><%= link_to 'Chỉnh sửa', edit_subject_path(subject), class: 'btn btn-sm btn-default', data: {toggle: 'modal', target: '#modal'} %></td>
         <% end %>
-        <td><%= link_to 'Xem các chủ đề', subject_courses_path(subject), class: 'btn btn-sm btn-default' %></td>
       </tr>
     <% end %>
   </tbody>
@@ -38,7 +44,7 @@
 <!-- trường hợp show tất cả các môn nên 
 ko phụ thuộc vào 1 category nào -->
 <% if @action == 'show_newest'%> 
-  <%= link_to 'Thêm môn học', '#', class: 'btn btn-sm btn-primary', data: {toggle: 'modal', target: '#newSubjectModal'} %> |
+  <%= link_to 'Thêm môn học', new_subject_path, class: 'btn btn-sm btn-primary', data: {toggle: 'modal', target: '#modal'} %> |
 <% else %>
   <%= link_to 'Thêm môn học', new_category_subject_path, class: 'btn btn-sm btn-primary', data: {toggle: 'modal', target: '#modal'} %> |
 <% end %>

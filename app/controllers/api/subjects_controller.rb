@@ -1,7 +1,7 @@
 class API::SubjectsController < ApplicationController
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!, only: [:new, :create, :edit, :update]
-  layout false, only: [:new, :edit]
+  layout false, only: [:new, :edit, :new_subject]
   
   def find_all_by_cate_id
     @subject = Subject.where(category_id: params[:cate_id])
@@ -36,6 +36,11 @@ class API::SubjectsController < ApplicationController
     @subject = Subject.new
     @action = 'new'
   end
+  def new_subject
+    @subject = Subject.new
+    @action = 'new_subject'
+    render :new
+  end
 
   def edit
     @action = 'edit'
@@ -54,13 +59,23 @@ class API::SubjectsController < ApplicationController
       end
     end
   end
-
-  # PATCH/PUT /subjects/1
-  # PATCH/PUT /subjects/1.json
-  def update
-    # @category = Category.find(params[:category_id])
+  def create_subject #ko co san category
+    @subject = Subject.create(updated_subject_params)
     respond_to do |format|
-      if @subject.update(subject_params)
+      if @subject.save
+        format.html { redirect_to subjects_path, notice: 'Subject was successfully created.' }
+        format.json { render category_subjects, status: :created, location: @subject }
+      else
+        format.html { render :new }
+        format.json { render json: @category.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
+  def update
+    respond_to do |format|
+      if @subject.update(updated_subject_params)
         format.html { redirect_to category_subjects_path(@subject.category_id), notice: 'Subject was successfully updated.' }
         format.json { render :index, status: :ok, location: @subject }
       else
@@ -89,5 +104,8 @@ class API::SubjectsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def subject_params
       params.require(:subject).permit(:name, :image)
+    end
+    def updated_subject_params
+      params.require(:subject).permit(:name, :image, :category_id)
     end
 end
