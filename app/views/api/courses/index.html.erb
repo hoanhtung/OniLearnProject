@@ -1,4 +1,9 @@
-<h1>Các chủ đề</h1>
+<h1>
+  <% if @action != 'show_newest' %>
+    <%= @subject.category.name %>/<%= @subject.name %>/
+  <% end %>
+  Các chủ đề
+</h1>
 <table>
   <thead>
     <tr>
@@ -39,14 +44,16 @@
         <% if admin_signed_in? && !current_admin.nil? %>
           <td><%= link_to 'Chỉnh sửa', edit_course_path(course), class: 'btn btn-sm btn-default', data: {toggle: 'modal', target: '#modal'} %></td>
         <% end %>
-        <td><%= link_to 'Xem các câu hỏi', course_questions_path(course) %></td>
+        <td><%= link_to 'Xem các câu hỏi', course_questions_path(course), class: 'btn btn-sm btn-default' %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 <%= paginate @courses, theme: 'twitter-bootstrap-4', outer_window: 3 %>
 <br>
-<% if @action != 'show_newest' %>
+<% if @action == 'show_newest' %>
+  <%= link_to 'Thêm chủ đề', new_course_path, class: 'btn btn-sm btn-success', data: {toggle: 'modal', target: '#modal'} %>
+<% else %>
   <%= link_to 'Thêm chủ đề', new_subject_course_path, class: 'btn btn-sm btn-primary', data: {toggle: 'modal', target: '#modal'} %>
 <% end %>
 

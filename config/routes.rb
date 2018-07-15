@@ -11,8 +11,12 @@ Rails.application.routes.draw do
       get '(page/:page)', action: :index, on: :collection, as: ''
     end
     get '/home', to: 'welcome#home'
-    get '/subjects', to: 'subjects#show_newest'
+    #courses
     get '/courses', to: 'courses#show_newest'
+    get '/new_course', to: 'courses#new_course' # tạo nhanh courses
+    post '/courses', to: 'courses#create_course' # tạo nhanh courses
+    #subjects
+    get '/subjects', to: 'subjects#show_newest'
     get '/new_subject', to: 'subjects#new_subject' #category ko có sẵn
     post '/subjects', to: 'subjects#create_subject' #category ko có sẵn
     resources :users

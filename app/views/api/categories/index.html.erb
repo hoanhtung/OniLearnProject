@@ -17,7 +17,7 @@
         <h3 class="box-title">Danh sách chuyên ngành</h3>
         <% if admin_signed_in? && !current_admin.nil? %>
           <div class="box-tools pull-right"> 
-            <%= link_to 'Tạo mới', new_category_path, class: 'btn btn-sm btn-primary', data: { toggle: 'modal', target: '#newCateModal' } %>
+            <%= link_to 'Tạo mới', new_category_path, class: 'btn btn-sm btn-primary', data: { toggle: 'modal', target: '#modal' } %>
           </div>
         <% end %>
     </div>
@@ -44,7 +44,7 @@
                 <%= link_to 'Xem các môn học', category_subjects_path(category), class: "btn btn-sm btn-default" %>
                 <!-- Only admin -->
                 <% if admin_signed_in? && !current_admin.nil? %>
-                  <%= link_to 'Sửa', edit_category_path(category), class: "btn btn-sm btn-default", data: { toggle: 'modal', target: '#newCateModal' } %>  
+                  <%= link_to 'Chỉnh sửa', edit_category_path(category), class: "btn btn-sm btn-default", data: { toggle: 'modal', target: '#modal' } %>  
                 <% end %>
               </td>
             </tr>

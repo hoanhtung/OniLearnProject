@@ -1,7 +1,7 @@
 class API::CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!, only: [:new, :create, :edit, :update]
-  layout false, only: [:new, :edit]
+  layout false, only: [:new, :edit, :new_course]
   def find_all_by_sub_id
     @courses = Course.where(subject_id: params[:sub_id])
     respond_to do |format|
@@ -11,7 +11,7 @@ class API::CoursesController < ApplicationController
 
   def index
     @subject = Subject.find(params[:subject_id])
-    @courses = Course.where(subject_id: @subject.id).joins(:subject)
+    @courses = Course.where(subject_id: @subject.id).page(params[:page]).per(5).joins(:subject)
     respond_to do |format|
       format.html
       format.json { render json: @courses}
@@ -23,7 +23,7 @@ class API::CoursesController < ApplicationController
     @action = 'show_newest'
     respond_to do |format|
       format.html { render :index}
-      format.json { render json: @courseS}
+      format.json { render json: @courses}
     end
   end
 
@@ -31,9 +31,15 @@ class API::CoursesController < ApplicationController
   end
 
   def new
-    @subject = Subject.find(params[:subject_id])
+    @subject = Subject.joins(:category).find(params[:subject_id])
     @course = Course.new
     @action = 'new'
+  end
+
+  def new_course
+    @course = Course.new
+    @action = 'new_course'
+    render :new
   end
 
   def edit
@@ -53,6 +59,21 @@ class API::CoursesController < ApplicationController
       end
     end
   end
+  # for creating fast course
+  def create_course
+    @subject = Subject.find(params[:subject_id])
+    @course = Course.create(fast_course_params)
+    respond_to do |format|
+      if @course.save
+        format.html { redirect_to courses_path, notice: 'Course was successfully created.' }
+        format.json { render :show, status: :created, location: @course }
+      else
+        format.html { render :new }
+        format.json { render json: @course.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
 
   def update
     respond_to do |format|
@@ -81,5 +102,8 @@ class API::CoursesController < ApplicationController
 
     def course_params
       params.require(:course).permit(:name, :description, :type_course, :icon)
+    end
+    def fast_course_params
+      params.require(:course).permit(:name, :description, :type_course, :icon, :subject_id)
     end
 end
