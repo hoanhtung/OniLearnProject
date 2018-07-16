@@ -45,6 +45,7 @@ Rails.application.routes.draw do
 
     #subjects
     get '/subjects', to: 'subjects#show_newest'
+    get '/newest_updated_time', to: 'subjects#get_newest_updated_time'
     #course
     get '/courses', to: 'courses#show_newest'
     #questions

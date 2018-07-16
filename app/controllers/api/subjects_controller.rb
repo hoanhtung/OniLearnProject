@@ -9,6 +9,10 @@ class API::SubjectsController < ApplicationController
       format.json { render :json => {subjects: @subject}}
     end
   end
+  def get_newest_updated_time
+    @time = Subject.maximum("updated_at")
+    render json: @time
+  end
 
   def show_newest
     @subjects = Subject.all.newest.page(params[:page]).per(5).joins(:category)
@@ -85,8 +89,6 @@ class API::SubjectsController < ApplicationController
     end
   end
 
-  # DELETE /subjects/1
-  # DELETE /subjects/1.json
   def destroy
     @subject.destroy
     respond_to do |format|
@@ -96,12 +98,10 @@ class API::SubjectsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_subject
       @subject = Subject.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def subject_params
       params.require(:subject).permit(:name, :image)
     end
