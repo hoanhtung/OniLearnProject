@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     resources :users
     resources :categories, concerns: :paginatable, only: [:index, :edit, :update, :new, :create], shallow: true do
       resources :subjects, concerns: :paginatable, only: [:index, :edit, :update, :new, :create], shallow: true do
-        resources :courses, shallow: true do
+        resources :courses, concerns: :paginatable, shallow: true do
           resources :questions do
             resources :answers
           end
