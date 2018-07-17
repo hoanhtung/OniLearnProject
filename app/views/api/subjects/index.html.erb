@@ -48,7 +48,7 @@
             <td><%= index + 1 %></td>
             <td>
               <% if subject.image? %>
-                <%= image_tag subject.image.thumb.url %>
+                <%= image_tag subject.image.thumb.url, size: '20x20' %>
               <% else %>
                 <%= image_tag 'subject.png', size: '20x20'%>
               <% end %>
