@@ -6,9 +6,8 @@
   </h1>
   <ol class="breadcrumb">
     <li><a href="/"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-    <li class="active"><%= link_to categories_path do %>Chuyên ngành<% end %></li>
     <% if @action != 'show_newest' %>
-      <li class="active"><%= @category.name %></li>
+      <li class="active"><%= link_to categories_path do %><%= @category.name %><% end %></li>
     <% end %>
     <li class="active">Các môn học</li>
   </ol>
