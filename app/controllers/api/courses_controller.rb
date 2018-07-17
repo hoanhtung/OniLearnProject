@@ -77,7 +77,7 @@ class API::CoursesController < ApplicationController
 
   def update
     respond_to do |format|
-      if @course.update(course_params)
+      if @course.update(fast_course_params)
         format.html { redirect_to subject_courses_path(@course.subject.id), notice: 'Course was successfully updated.' }
         format.json { render :show, status: :ok, location: @course }
       else

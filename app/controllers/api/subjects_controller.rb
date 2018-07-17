@@ -9,6 +9,7 @@ class API::SubjectsController < ApplicationController
       format.json { render :json => {subjects: @subject}}
     end
   end
+  #lấy ngày cập nhật mới nhất
   def get_newest_updated_time
     @time = Subject.maximum("updated_at")
     render json: @time
@@ -76,7 +77,7 @@ class API::SubjectsController < ApplicationController
     end
   end
 
-
+ # ca update theo category va khong theo category
   def update
     respond_to do |format|
       if @subject.update(updated_subject_params)

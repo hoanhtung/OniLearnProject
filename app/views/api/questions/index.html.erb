@@ -33,5 +33,6 @@
 </table>
 
 <br>
-
-<%= link_to 'New Question', new_course_question_path %>
+<% if admin_signed_in? && !current_admin.nil? %>
+  <%= link_to 'New Question', new_course_question_path %>
+<% end %>

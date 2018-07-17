@@ -43,9 +43,10 @@
 <br>
 <!-- trường hợp show tất cả các môn nên 
 ko phụ thuộc vào 1 category nào -->
-<% if @action == 'show_newest'%> 
-  <%= link_to 'Thêm môn học', new_subject_path, class: 'btn btn-sm btn-primary', data: {toggle: 'modal', target: '#modal'} %> |
-<% else %>
-  <%= link_to 'Thêm môn học', new_category_subject_path, class: 'btn btn-sm btn-primary', data: {toggle: 'modal', target: '#modal'} %> |
+<% if admin_signed_in? && !current_admin.nil? %>
+  <% if @action == 'show_newest'%> 
+    <%= link_to 'Thêm môn học', new_subject_path, class: 'btn btn-sm btn-primary', data: {toggle: 'modal', target: '#modal'} %>
+  <% else %>
+    <%= link_to 'Thêm môn học', new_category_subject_path, class: 'btn btn-sm btn-primary', data: {toggle: 'modal', target: '#modal'} %>
+  <% end %>
 <% end %>
-<%= link_to 'Trở về', categories_path %>
