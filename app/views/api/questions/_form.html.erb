@@ -1,12 +1,11 @@
 <%= form_with(model: [@course, question], local: true) do |form| %>
-
   <div class="field">
     <div class='form-group'>
       <b>Nội dung câu hỏi: </b><br/>
       <%= form.text_area :content, class: 'form-control' %>
     </div>
     <div class='form-group'>
-      <b>Loại:<br/>
+      <b>Loại:</b>
       <div class='row'>
         <div class='col-xs-12 col-sm-3 col-md-2'>
           <%= form.radio_button(:type_question, "0", checked: true) %>
@@ -23,53 +22,70 @@
       </div> 
     </div>
     <div class='form-group'>
-      <%= form.label ('Câu trả lời: ') %>
-
-        <div class="field" id="answer_field">
-        <% if @action %> <%# load edit answer%>
+      <b>Câu trả lời</b>
+      <div class="field" id="answer_field">
+        <% if @action == 'edit' %> <%# load edit answer%>
           <% question.answers.each do |item| %>
             <%= form.fields_for :answers, Answer.new do |ans| %>
-                <div class="row" style="margin-top: 20px">
-                  <div class='col-xs-9 col-sm-10 col-md-11'>
-                    <%= ans.text_area :content, value: item.content, class: 'form-control' %>
-                  </div>
-                  <div class='col-xs-3 col-sm-2 col-md-1'>
-                    <%= ans.check_box :is_right, checked: item.is_right %>
-                    <button type="button" onclick="removeAnswerField(event)" 
-                      class='btn btn-xs btn-danger'>
-                        <i class="fa fa-minus-circle"></i>
-                    </button><br/>
-                  </div>
+              <div class="row field" style="margin-top: 20px">
+                <div class='col-xs-9 col-sm-10 col-md-11'>
+                  <%= ans.text_area :content, value: item.content, class: 'form-control' %>
                 </div>
-              <% end %>
-          <% end %>
-        <% else %>
-            <%= form.fields_for :answers, Answer.new do |ans| %>
-              <div class="field">
-                <%= ans.text_area :content %>
-                <%= ans.check_box :is_right %>
+                <div class='col-xs-3 col-sm-2 col-md-1'>
+                  <%= ans.check_box :is_right, checked: item.is_right %>
+                  <button type="button" onclick="removeAnswerField(event)" class='btn btn-xs btn-danger'>
+                    <i class="fa fa-minus-circle"></i>
+                  </button>
+                </div>
               </div>
             <% end %>
-            <%= form.fields_for :answers, Answer.new do |ans| %>
-              <div class="field">
-                <%= ans.text_area :content %>
-                <%= ans.check_box :is_right %>
+          <% end %>
+        <% else %>
+          <%= form.fields_for :answers, Answer.new do |ans| %>
+            <div class="field row" style="margin-top: 20px">
+              <div class='col-xs-9 col-sm-10 col-md-11'>
+                <%= ans.text_area :content, class: 'form-control' %>
               </div>
-            <% end %> 
+              <div class='col-xs-3 col-sm-2 col-md-1'>
+                <%= ans.check_box :is_right %>
+                <button type="button" onclick="removeAnswerField(event)" class='btn btn-xs btn-danger'>
+                  <i class="fa fa-minus-circle"></i>
+                </button>
+              </div>
+            </div>
+          <% end %>
+          <%= form.fields_for :answers, Answer.new do |ans| %>
+            <div class="field row" style="margin-top: 20px">
+              <div class='col-xs-9 col-sm-10 col-md-11'>
+                <%= ans.text_area :content, class: 'form-control' %>
+              </div>
+              <div class='col-xs-3 col-sm-2 col-md-1'>
+                <%= ans.check_box :is_right %>
+                <button type="button" onclick="removeAnswerField(event)" class='btn btn-xs btn-danger'>
+                  <i class="fa fa-minus-circle"></i>
+                </button>
+              </div>
+            </div>
+          <% end %> 
         <% end %>
-        </div>
-
-        <div style="margin-top: 10px">
-          <button type="button" onClick='appendNewAnswerInput()' id="add_answer_btn" 
-            class='btn btn-sm btn-success'>  
-              <i class="fa fa-plus"></i>
-          </button>
-        </div>
-
+      </div>
+      <div style="margin-top: 10px">
+        <button type="button" onClick='appendNewAnswerInput()' id="add_answer_btn" class='btn btn-sm btn-success'>  
+            <i class="fa fa-plus"></i>
+        </button>
+      </div>      
+      <% if @action == 'new'%>
         <div class="actions" style="width: 100%; text-align: right; margin-top: 10px; border-top: solid 1px #ddd; padding-top: 10px">
           <%= form.submit('Tạo mới', class: 'btn btn-sm btn-primary') %>
         </div>
       <% end %>
+      <% if @action == 'edit'%>
+        <div class="actions" style="width: 100%; text-align: right; margin-top: 10px; border-top: solid 1px #ddd; padding-top: 10px">
+          <%= form.submit('Cập nhật', class: 'btn btn-sm btn-primary') %>
+        </div> 
+      <% end %>
     </div>
   </div>
+<% end %>
+
 

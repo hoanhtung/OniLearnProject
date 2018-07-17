@@ -41,6 +41,7 @@ class API::QuestionsController < ApplicationController
     @course = Course.find(params[:course_id])
     @question = Question.new
     @question.answers.build
+    @action = 'new'
   end
 
   # GET /questions/1/edit

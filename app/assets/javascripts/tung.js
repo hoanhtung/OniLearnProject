@@ -39,10 +39,10 @@ function getCourseBySubId(id) {
 var index = 1;
 function appendNewAnswerInput() {
     index += 1;
-    var div = '<div class="row" style="margin-top: 20px">';
+    var div = '<div class="field row" style="margin-top: 20px">';
     var new_answer_field = '<div class="col-xs-9 col-sm-10 col-md-11"><textarea name="question[answers_attributes]['+ index +'][content]" class="form-control"></textarea></div>';
-    var checkbox_answer = '<div class="col-xs-3 col-sm-2 col-md-1"><input type="checkbox" value="1" name="question[answers_attributes][' + index + '][is_right]" style="margin: 2px"/>';
-    var remove_answer_btn = '<button type="button" onclick="removeAnswerField(event)" class="btn btn-xs btn-danger"><i class="fa fa-minus-circle"></i></button></div>';
+    var checkbox_answer = '<div class="col-xs-3 col-sm-2 col-md-1"><input type="checkbox" value="1" name="question[answers_attributes][' + index + '][is_right]" style="margin: 2px">';
+    var remove_answer_btn = '<button type="button" class="btn btn-xs btn-danger" onclick="removeAnswerField(event)"><i class="fa fa-minus-circle"></i></button></div>';
     div += new_answer_field;
     div += checkbox_answer;
     div += remove_answer_btn;
