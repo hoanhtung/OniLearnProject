@@ -4,12 +4,12 @@ function notifyAll(notice) {
   }
 function getSubjectByCateId(id) {
     $.ajax({
-        url: '/find_by_category_id',
+        url: '/all_subject_by_category_id',
         method: 'get',
-        data: {cate_id: id},
+        data: {category_id: id},
         success: function(data) {
             $('#subject_select').empty();
-            $('#subject_select').append("<select id='subject_select_id' onchange='getCourseBySubId(this.options[this.selectedIndex].value)'>")
+            $('#subject_select').append("<select class='form-control' name='course[subject_id]' id='subject_select_id' onchange='getCourseBySubId(this.options[this.selectedIndex].value)'>")
             for (i = 0; i < data.subjects.length; i++) {
                 $('#subject_select_id')
                 .append("<option value="+ data.subjects[i].id+ ">"+ data.subjects[i].name + "</option>")

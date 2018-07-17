@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     get '/new_course', to: 'courses#new_course' # tạo nhanh courses
     post '/courses', to: 'courses#create_course' # tạo nhanh courses
     #subjects
+    get '/all_subject_by_category_id', to: 'subjects#find_all_by_cate_id'
     get '/subjects', to: 'subjects#show_newest'
     get '/new_subject', to: 'subjects#new_subject' #category ko có sẵn
     post '/subjects', to: 'subjects#create_subject' #category ko có sẵn

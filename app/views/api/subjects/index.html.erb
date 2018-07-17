@@ -22,9 +22,9 @@
           <!-- trường hợp show tất cả các môn nên 
           ko phụ thuộc vào 1 category nào -->
           <% if @action == 'show_newest'%> 
-            <%= link_to 'Thêm môn học', new_subject_path, class: 'btn btn-sm btn-primary', data: {toggle: 'modal', target: '#modal'} %>
+            <%= link_to 'Tạo mới', new_subject_path, class: 'btn btn-sm btn-primary', data: {toggle: 'modal', target: '#modal'} %>
           <% else %>
-            <%= link_to 'Thêm môn học', new_category_subject_path, class: 'btn btn-sm btn-primary', data: {toggle: 'modal', target: '#modal'} %>
+            <%= link_to 'Tạo mới', new_category_subject_path, class: 'btn btn-sm btn-primary', data: {toggle: 'modal', target: '#modal'} %>
           <% end %>
           </div>
         <% end %>

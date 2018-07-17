@@ -19,7 +19,7 @@ class API::CoursesController < ApplicationController
   end
 
   def show_newest
-    @courses = Course.all.page(params[:page]).per(5).joins(:subject)
+    @courses = Course.all.newest.page(params[:page]).per(5).joins(:subject)
     @action = 'show_newest'
     respond_to do |format|
       format.html { render :index}
@@ -61,12 +61,11 @@ class API::CoursesController < ApplicationController
   end
   # for creating fast course
   def create_course
-    @subject = Subject.find(params[:subject_id])
     @course = Course.create(fast_course_params)
     respond_to do |format|
       if @course.save
         format.html { redirect_to courses_path, notice: 'Course was successfully created.' }
-        format.json { render :show, status: :created, location: @course }
+        format.json { render courses_path, status: :created, location: @course }
       else
         format.html { render :new }
         format.json { render json: @course.errors, status: :unprocessable_entity }

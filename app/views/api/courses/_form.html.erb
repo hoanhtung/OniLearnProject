@@ -1,18 +1,30 @@
 <%= form_with(model: [@subject, course], local: true) do |form| %>
   <div class="modal-body">
     <div class="form-group">
-      <b>Chuyên ngành:</b>
+      <!-- Chuyên ngành -->
+      <b>Chuyên ngành</b>
       <% if @action == 'new' %>
         <%= @subject.category.name %>
       <% end %>
       <% if @action == 'new_course' %>
+        <%= select_tag "category_id", options_from_collection_for_select(Category.all, :id, :name), 
+        :prompt => '-----Chọn chuyên ngành-----', 
+        :class => 'form-control', :onChange => "getSubjectByCateId(this.options[this.selectedIndex].value)" %>
       <% end %>
       <% if @action == 'edit' %>
       <% end %>
-      <br/>
-      <b>Môn học:</b>
+    </div>
+    <div class="form-group">
+      <!-- Môn học -->
+      <b>Môn học</b>
       <% if @action == 'new' %>
         <%= @subject.name %>
+      <% end %>
+      <% if @action == 'new_course' %>
+        <div id="subject_select">
+          <%= form.select "subject_id", '<option></option>', 
+          {prompt: '-----Chọn môn học-----'}, {class: 'form-control'} %>
+        </div>
       <% end %>
       <% if @action == 'edit' %>
         <%= form.select "subject_id", options_from_collection_for_select(Subject.all, :id, :name, "#{@course.subject_id}"), {}, {class: 'form-control'} %>

@@ -6,10 +6,10 @@
   </h1>
   <ol class="breadcrumb">
     <li><a href="/"><i class="fa fa-dashboard"></i>Trang chủ</a></li>
-    <li class="active">Lớp 5</li>
-    <li class="active">KTN</li>
-    <li class="active">KT số 1</li>
-    <li class="active">Câu hỏi</li>
+    <li><%= link_to "#{@subject.category.name}", categories_path %></li>
+    <li><%= link_to "#{@course.subject.name}", category_subjects_path(@subject.category_id) %></li>
+    <li><%= link_to "#{@course.name}" ,subject_courses_path(@course.subject_id) %></li>
+    <li class="active">Các câu hỏi</li>
   </ol>
 </section>
 

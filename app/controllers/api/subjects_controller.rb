@@ -4,7 +4,7 @@ class API::SubjectsController < ApplicationController
   layout false, only: [:new, :edit, :new_subject]
   
   def find_all_by_cate_id
-    @subject = Subject.where(category_id: params[:cate_id])
+    @subject = Subject.where(category_id: params[:category_id])
     respond_to do |format|
       format.json { render :json => {subjects: @subject}}
     end

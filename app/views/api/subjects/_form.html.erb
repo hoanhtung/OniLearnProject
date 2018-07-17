@@ -6,7 +6,7 @@
         <%= @category.name %><br/>
       <% end %>
       <% if @action == 'edit' %>
-        <%= form.select "category_id", options_from_collection_for_select(Category.all, :id, :name, "#{subject.category_id}"), {class: 'form-control'} %>
+        <%= form.select "category_id", options_from_collection_for_select(Category.all, :id, :name, "#{subject.category_id}"), {}, {class: 'form-control'} %>
       <% end %>
       <% if @action == 'new_subject' %>
         <br/>
@@ -23,14 +23,11 @@
     </div>
   </div>
   <div class="modal-footer actions">
-    <% if @action == 'new'%>
-      <button class="btn btn-primary">Tạo mới</button>
-    <% end %>
-    <% if @action == 'new_subject' %>
-      <button class="btn btn-primary">Tạo mới</button>
+    <% if @action == 'new' || @action == 'new_subject'%>
+      <button class="btn btn-default">Tạo mới</button>
     <% end %>
     <% if @action == 'edit' %>
-      <button class="btn btn-primary">Cập nhật</button>
+      <button class="btn btn-default">Cập nhật</button>
     <% end %>
   </div>
 <% end %>
