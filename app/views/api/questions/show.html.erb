@@ -1,26 +1,51 @@
-<p>
-  <strong>Nội dung:</strong>
-  <%= @question.content %> <br/>
-  <strong>Loại:</strong>
-  <%= @question.type_question %>
-  <% if @question.type_question == 2 %>
-    Multichoice
-  <% elsif @question.type_question.nil?  %>
-    N/A
-  <%else%>
-    True/False
-  <% end %>
-</p>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    OniLearn
+    <small>Nội dung câu hỏi</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="/"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+    <li class="active">Chuyên ngành</li>
+    <%= link_to 'Back', course_questions_path(@question.course_id) %>
+  </ol>
+</section>
 
-
-<p>
-  <strong>Câu trả lời:</strong> <br/>
-  <% @question.answers.each do |ans| %>
-    <%= ans.content %>
-    <%= ans.is_right %>
-    <br/>
-  <% end %>
-</p>
-
-<%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', course_questions_path(@question.course_id) %>
+<!-- Main content -->
+<section class="content">   
+  <div class="box">
+    <div class="box-header with-border">
+      <h3 class="box-title">Nội dung câu hỏi</h3>
+      <div class="box-tools pull-right"> 
+        <%= link_to 'Sửa', edit_question_path(@question), class: 'btn btn-sm btn-primary' %>
+      </div>
+    </div>
+    <div class="box-body">
+      <p>
+        <strong>Nội dung:</strong>
+        <%= @question.content %> <br/>
+        <strong>Loại:</strong>
+        <%= @question.type_question %>
+        <% if @question.type_question == 2 %>
+          Multichoice
+        <% elsif @question.type_question.nil?  %>
+          N/A
+        <%else%>
+          True/False
+        <% end %>
+      </p>
+      <p>
+        <strong>Câu trả lời:</strong> <br/>
+        <% @question.answers.each do |ans| %>
+          <% if ans.is_right == true %>
+            <span class="label label-success"><%= ans.is_right %></span>
+          <% else %>
+            <span class="label label-danger"><%= ans.is_right %></span>
+          <% end %>
+          <%= ans.content %>
+          <br/>
+        <% end %>
+      </p>
+    </div>
+  </div>
+<section>
