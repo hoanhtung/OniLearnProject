@@ -1,38 +1,63 @@
-<p id="notice"><%= notice %></p>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    OniLearn
+    <small>Quản lý câu hỏi</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="/"><i class="fa fa-dashboard"></i>Trang chủ</a></li>
+    <li class="active">Lớp 5</li>
+    <li class="active">KTN</li>
+    <li class="active">KT số 1</li>
+    <li class="active">Câu hỏi</li>
+  </ol>
+</section>
 
-<h1>Questions</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Nội dung</th>
-      <th>Loại câu hỏi</th>
-      <th colspan="3">Thao tác</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @questions.each do |question| %>
+<!-- Main content -->
+<section class="content">   
+  <div class="box">
+    <div class="box-header with-border">
+        <h3 class="box-title">Danh sách câu hỏi</h3>
+        <% if admin_signed_in? && !current_admin.nil? %>
+          <div class="box-tools pull-right"> 
+            <%= link_to 'Tạo mới', new_course_question_path, class: 'btn btn-sm btn-primary' %>
+          </div>
+        <% end %>
+    </div>
+    <div class="box-body">
+    <table class="table table-consider table-striped">
+    <thead>
       <tr>
-        <td><%= question.content %></td>
-        <td>
-            <% if question.type_question == 2 %>
-              Multichoice
-            <% elsif question.type_question.nil?  %>
-              N/A
-            <%else%>
-              True/False
-            <% end %>
-        </td>
-        <td><%= link_to 'Xem câu trả lời', question_path(question) %></td>
-        <td><%= link_to 'Chỉnh sửa', edit_question_path(question) %></td>
-        <td><%= link_to 'Xóa', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th style="width: 5%">#</th>
+        <th style="width: 50%">Nội dung</th>
+        <th style="width: 15%">Loại câu hỏi</th>
+        <th style="width: 30%; text-align: right">Thao tác</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-<% if admin_signed_in? && !current_admin.nil? %>
-  <%= link_to 'New Question', new_course_question_path %>
-<% end %>
+    </thead>
+  
+    <tbody>
+      <% @questions.each_with_index do |question, index| %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><%= question.content %></td>
+          <td>
+              <% if question.type_question == 2 %>
+                Multichoice
+              <% elsif question.type_question.nil?  %>
+                N/A
+              <%else%>
+                True/False
+              <% end %>
+          </td>
+          <td style="text-align: right">
+            <%= link_to 'Xem', question_path(question), class: 'btn btn-sm btn-default' %>
+            <%= link_to 'Chỉnh sửa', edit_question_path(question), class: 'btn btn-sm btn-default' %>
+            <%= link_to 'Xóa', question, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-default' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+    </div>
+  </div>
+</section>

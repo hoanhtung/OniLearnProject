@@ -1,47 +1,75 @@
 <%= form_with(model: [@course, question], local: true) do |form| %>
 
   <div class="field">
-    Nội dung câu hỏi: <br/>
-    <%= form.text_area :content %> <br/>
-    Loại:
-    <%= form.radio_button(:type_question, "0", checked: true) %>
-    True
-    <%= form.radio_button(:type_question, "1") %>
-    False
-    <%= form.radio_button(:type_question, "2") %>
-    Multichoice <br/>
-  </div>
-
-  <%= form.label ('Câu trả lời: ') %> <br/>
-    <div class="field" id="answer_field">
-    <% if @action %> <%# load edit answer%>
-      <% question.answers.each do |item| %>
-        <%= form.fields_for :answers, Answer.new do |ans| %>
-            <div class="field">
-              <%= ans.text_area :content, value: item.content %>
-              <%= ans.check_box :is_right, checked: item.is_right %>
-              <button type="button" onclick="removeAnswerField(event)">x</button><br/>
-            </div>
-          <% end %>
-      <% end %>
-    <% else %>
-        <%= form.fields_for :answers, Answer.new do |ans| %>
-          <div class="field">
-            <%= ans.text_area :content %>
-            <%= ans.check_box :is_right %>
-          </div>
-        <% end %>
-        <%= form.fields_for :answers, Answer.new do |ans| %>
-          <div class="field">
-            <%= ans.text_area :content %>
-            <%= ans.check_box :is_right %>
-          </div>
-        <% end %> 
-    <% end %>
+    <div class='form-group'>
+      <b>Nội dung câu hỏi: </b><br/>
+      <%= form.text_area :content, class: 'form-control' %>
     </div>
-  <button type="button" onClick='appendNewAnswerInput()' id="add_answer_btn">+</button>
-  <div class="actions">
-    <%= form.submit('Tạo mới') %>
+    <div class='form-group'>
+      <b>Loại:<br/>
+      <div class='row'>
+        <div class='col-xs-12 col-sm-3 col-md-2'>
+          <%= form.radio_button(:type_question, "0", checked: true) %>
+          True
+        </div>
+        <div class='col-xs-12 col-sm-3 col-md-2'>
+          <%= form.radio_button(:type_question, "1") %>
+          False
+        </div>
+        <div class='col-xs-12 col-sm-3 col-md-2'>
+          <%= form.radio_button(:type_question, "2") %>
+          Multichoice
+        </div>
+      </div> 
+    </div>
+    <div class='form-group'>
+      <%= form.label ('Câu trả lời: ') %>
+
+        <div class="field" id="answer_field">
+        <% if @action %> <%# load edit answer%>
+          <% question.answers.each do |item| %>
+            <%= form.fields_for :answers, Answer.new do |ans| %>
+                <div class="row" style="margin-top: 20px">
+                  <div class='col-xs-9 col-sm-10 col-md-11'>
+                    <%= ans.text_area :content, value: item.content, class: 'form-control' %>
+                  </div>
+                  <div class='col-xs-3 col-sm-2 col-md-1'>
+                    <%= ans.check_box :is_right, checked: item.is_right %>
+                    <button type="button" onclick="removeAnswerField(event)" 
+                      class='btn btn-xs btn-danger'>
+                        <i class="fa fa-minus-circle"></i>
+                    </button><br/>
+                  </div>
+                </div>
+              <% end %>
+          <% end %>
+        <% else %>
+            <%= form.fields_for :answers, Answer.new do |ans| %>
+              <div class="field">
+                <%= ans.text_area :content %>
+                <%= ans.check_box :is_right %>
+              </div>
+            <% end %>
+            <%= form.fields_for :answers, Answer.new do |ans| %>
+              <div class="field">
+                <%= ans.text_area :content %>
+                <%= ans.check_box :is_right %>
+              </div>
+            <% end %> 
+        <% end %>
+        </div>
+
+        <div style="margin-top: 10px">
+          <button type="button" onClick='appendNewAnswerInput()' id="add_answer_btn" 
+            class='btn btn-sm btn-success'>  
+              <i class="fa fa-plus"></i>
+          </button>
+        </div>
+
+        <div class="actions" style="width: 100%; text-align: right; margin-top: 10px; border-top: solid 1px #ddd; padding-top: 10px">
+          <%= form.submit('Tạo mới', class: 'btn btn-sm btn-primary') %>
+        </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
 
