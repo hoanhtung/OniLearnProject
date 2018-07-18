@@ -11,7 +11,7 @@ class API::CoursesController < ApplicationController
 
   def index
     @subject = Subject.find(params[:subject_id])
-    @courses = Course.where(subject_id: @subject.id).page(params[:page]).per(5).joins(:subject)
+    @courses = Course.where(subject_id: @subject.id).newest.page(params[:page]).per(5).joins(:subject)
     respond_to do |format|
       format.html
       format.json { render json: @courses}
@@ -77,7 +77,7 @@ class API::CoursesController < ApplicationController
   def update
     respond_to do |format|
       if @course.update(fast_course_params)
-        format.html { redirect_to subject_courses_path(@course.subject.id), notice: 'Course was successfully updated.' }
+        format.html { redirect_to subject_courses_path(@course.subject_id), notice: 'Course was successfully updated.' }
         format.json { render :show, status: :ok, location: @course }
       else
         format.html { render :edit }
