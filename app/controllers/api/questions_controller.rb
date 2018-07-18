@@ -11,7 +11,7 @@ class API::QuestionsController < ApplicationController
     render json: @questions
   end
   def load_random_questions
-    @questions = Question.load_random(params[:amount])
+    @questions = Question.load_by_course(params[:course_id]).load_random(params[:amount])
     # @questions = Question.offset(rand(Question.count)).limit()
     render json: @questions
   end
