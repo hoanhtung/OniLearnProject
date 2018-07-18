@@ -41,6 +41,10 @@ Rails.application.routes.draw do
     # devise_scope :users do
     #   root to: 'api/user/sessions#new'
     # end
+
+    #categories
+    get '/all_categories', to: 'categories#load_categories_subjects'
+
     get '/find_by_category_id', to: 'subjects#find_all_by_cate_id'
     get '/find_by_subject_id', to: 'courses#find_all_by_sub_id'
 

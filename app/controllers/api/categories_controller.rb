@@ -12,7 +12,7 @@
     end
 
     def load_categories_subjects
-      @categories = Category.include(:subjects).all
+      @categories = Category.includes(:subjects).all
       render json: @categories
     end
 

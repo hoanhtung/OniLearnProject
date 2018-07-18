@@ -2,6 +2,22 @@
 function notifyAll(notice) {
     $.notify(notice, {className: "success", position: "top center"});
   }
+
+function getCategories() {
+    $.ajax({
+        url: '/api/all_categories',
+        method: 'get',
+        data: {subject_id: id},
+        success: function(data) {
+            $('#category_select').empty();
+            $('#category_select').append("<select class='form-control' onchange='getSubjectByCateId(this.options[this.selectedIndex].value)'>")
+            for (i = 0; i < data.categories.length; i++) {
+                $('#category_select').append("<option value="+ data.categories[i].id+ ">"+ data.categories[i].name + "</option>")
+            }
+            $('#category_select').append("</select>")       
+        }
+    })
+}  
 function getSubjectByCateId(id) {
     $.ajax({
         url: '/all_subject_by_category_id',
