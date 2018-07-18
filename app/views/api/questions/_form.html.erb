@@ -8,16 +8,7 @@
       <b>Loại:</b>
       <div class='row'>
         <div class='col-xs-12 col-sm-3 col-md-2'>
-          <%= form.radio_button(:type_question, "0", checked: true) %>
-          True
-        </div>
-        <div class='col-xs-12 col-sm-3 col-md-2'>
-          <%= form.radio_button(:type_question, "1") %>
-          False
-        </div>
-        <div class='col-xs-12 col-sm-3 col-md-2'>
-          <%= form.radio_button(:type_question, "2") %>
-          Multichoice
+          <%= form.select(:type_question, options_for_select([['True', 0], ['False', 1], ['Multichoice', 2]], 2), {}, {class: 'form-control'}) %>
         </div>
       </div> 
     </div>

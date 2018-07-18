@@ -49,6 +49,7 @@ Rails.application.routes.draw do
     get '/find_by_subject_id', to: 'courses#find_all_by_sub_id'
 
     #subjects
+    get '/subject_by_id', to: 'subjects#find_subject_by_id'
     get '/subjects', to: 'subjects#show_newest'
     get '/newest_updated_time_subject', to: 'subjects#get_newest_updated_time'
     #course

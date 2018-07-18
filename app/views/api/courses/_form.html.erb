@@ -1,6 +1,4 @@
-<script>
-  getCategories();
-</script>
+
 <%= form_with(model: [@subject, course], local: true) do |form| %>
   <div class="modal-body">
     <div class="form-group">
@@ -14,8 +12,11 @@
           :prompt => '-----Chọn chuyên ngành-----', 
           :class => 'form-control', :onChange => "getSubjectByCateId(this.options[this.selectedIndex].value)" %>
       <% end %>
+      <script>
+        getSubjectById();
+      </script>
       <% if @action == 'edit' %>
-        <div id="category_select">
+        <div id="category_select_div">
         </div>    
       <% end %>
     </div>

@@ -2,13 +2,19 @@ class API::SubjectsController < ApplicationController
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!, only: [:new, :create, :edit, :update]
   layout false, only: [:new, :edit, :new_subject]
-  
+  #---------------api------------
   def find_all_by_cate_id
     @subject = Subject.where(category_id: params[:category_id])
     respond_to do |format|
       format.json { render :json => {subjects: @subject}}
     end
   end
+  def find_subject_by_id
+    @subject = Subject.find_by_id(params[:subject_id])
+    respond_to do |format|
+      format.json { render :json => {cate_id: @subject.category_id}}
+    end
+  end    
   #lấy ngày cập nhật mới nhất
   def get_newest_updated_time
     @time = Subject.maximum("updated_at")
