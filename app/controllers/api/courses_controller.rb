@@ -12,6 +12,7 @@ class API::CoursesController < ApplicationController
   def index
     @subject = Subject.find(params[:subject_id])
     @courses = Course.where(subject_id: @subject.id).newest.page(params[:page]).per(5).joins(:subject)
+    @flag = 'index_course'
     respond_to do |format|
       format.html
       format.json { render json: @courses}
@@ -19,8 +20,23 @@ class API::CoursesController < ApplicationController
   end
 
   def show_newest
-    @courses = Course.all.newest.page(params[:page]).per(5).joins(:subject)
+    if params[:search_course]
+      all_courses = Course.search_by_name(params[:search_course])
+      @courses = all_courses.newest.page(params[:page]).per(5)
+      if all_courses.all.size == 0
+        flash[:result] = "Không tìm thấy kết quả phù hợp"
+        flash[:noti_empty] = "empty"
+      else
+        flash[:result] = "Tìm thấy #{all_courses.all.size} kết quả phù hợp"
+        flash[:noti_empty] = ""
+      end
+    else
+      @courses = Course.all.newest.page(params[:page]).per(5).joins(:subject)
+      flash[:result] = ""
+      flash[:noti_empty] = ""
+    end
     @action = 'show_newest'
+    @flag = 'index_course'
     respond_to do |format|
       format.html { render :index}
       format.json { render json: @courses}

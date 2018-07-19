@@ -22,8 +22,23 @@ class API::SubjectsController < ApplicationController
   end
 
   def show_newest
-    @subjects = Subject.all.newest.page(params[:page]).per(5).joins(:category)
+    if params[:search_subject]
+      all_subject = Subject.search_by_name(params[:search_subject])
+      @subjects = all_subject.newest.page(params[:page]).per(5)
+      if all_subject.all.size == 0
+        flash[:result] = "Không tìm thấy kết quả phù hợp"
+        flash[:noti_empty] = "empty"
+      else
+        flash[:result] = "Tìm thấy #{all_subject.all.size} kết quả phù hợp"
+        flash[:noti_empty] = ""
+      end
+    else
+      @subjects = Subject.all.newest.page(params[:page]).per(5).joins(:category)
+      flash[:result] = ""
+      flash[:noti_empty] = ""
+    end
     @action = 'show_newest'
+    @flag = 'index_subject'
     respond_to do |format|
       format.html { render :index}
       format.json { render json: @subjects}
@@ -33,6 +48,7 @@ class API::SubjectsController < ApplicationController
   def index
     @category = Category.find(params[:category_id])
     @subjects = Subject.where(category_id: @category.id).page(params[:page]).per(5)
+    @flag = 'index_subject'
     respond_to do |format|
       format.html { render :index, locals: {category: @category}}
       format.json { render json: @subjects}
