@@ -14,7 +14,8 @@
     def load_categories_subjects
       @categories = Category.includes(:subjects).all
       respond_to do |format|
-        format.json { render :json => {categories: @categories}}
+        format.html 
+        format.json { render json: @categories.to_json(:include => :subjects)}
       end
     end
 
