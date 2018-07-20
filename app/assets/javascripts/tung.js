@@ -84,3 +84,22 @@ function appendNewAnswerInput() {
 function removeAnswerField(event) {
     $(event.target).closest('.field').remove();
 }
+function preview_image(event) {
+    var reader = new FileReader();
+    reader.onload = function() {
+        var output = $(event.target).next();
+        output.css("backgroundImage", "url(" + reader.result +  ")");
+        output.css("display", "block");
+    }
+    reader.readAsDataURL(event.target.files[0]);
+}
+
+var new_image_field = "<div class='file_field'><button type='button' class='btn btn-dark btn-image'><i class='fa fa-image fa-3x'/></button>" +
+                     "<input class='image-input' onchange='preview_image(event)' type='file' name='subject[image]' id='subject_image'/>" +
+                     "<div class='image-output'><div class='btn btn-danger image-remove' onclick='remove_image(event)'><i class='fa fa-trash'></i></div></div></div>" ;
+                    
+function remove_image(event) {
+    var file_field = $(event.target).parents(".file_field");
+    file_field.remove();
+    $("#file_field_container").append(new_image_field);
+}

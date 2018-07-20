@@ -15,6 +15,7 @@
           flash[:noti_empty] = ""
         end
       else
+        #.newes
         @categories = Category.all.newest.page(params[:page]).per(5)
         flash[:result] = ""
         flash[:noti_empty] = ""
@@ -22,7 +23,7 @@
       @flag = 'index_cate'
       respond_to do |format|
         format.html 
-        format.json { render json: @categories.to_json(:include => :subjects)}
+        format.json { render json: @categories.to_json(:include => :subjects), status: :ok}
       end
     end
 
