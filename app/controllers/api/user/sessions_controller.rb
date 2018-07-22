@@ -1,31 +1,26 @@
 # frozen_string_literal: true
 class API::User::SessionsController < Devise::SessionsController
-  skip_before_filter :verify_authenticity_token,
-                     :if => Proc.new { |c| c.request.format == 'application/json' }
+  # before_action :configure_sign_in_params, only: [:create]
 
-  respond_to :json
+  # GET /resource/sign_in
+  # def new
+  #   super
+  # end
 
-  def create
-    warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#failure")
-    render :status => 200,
-           :json => { :success => true,
-                      :info => "Logged in",
-                      :data => { :auth_token => current_user.authentication_token } }
-  end
+  # POST /resource/sign_in
+  # def create
+  #   super
+  # end
 
-  def destroy
-    warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#failure")
-    current_user.update_column(:authentication_token, nil)
-    render :status => 200,
-           :json => { :success => true,
-                      :info => "Logged out",
-                      :data => {} }
-  end
+  # DELETE /resource/sign_out
+  # def destroy
+  #   super
+  # end
 
-  def failure
-    render :status => 401,
-           :json => { :success => false,
-                      :info => "Login Failed",
-                      :data => {} }
-  end
+  # protected
+
+  # If you have extra params to permit, append them to the sanitizer.
+  # def configure_sign_in_params
+  #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
+  # end
 end
