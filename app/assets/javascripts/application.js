@@ -27,4 +27,11 @@
 //= require login/moment.min
 //= require login/daterangepicker
 //= require login/countdowntime
+
+//= require animsition.min
+//= require popper
+//= require select2.min
+//= require moment.min
+//= require daterangepicker
+//= require countdowntime
 //= require_tree .
