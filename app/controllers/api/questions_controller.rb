@@ -11,7 +11,7 @@ class API::QuestionsController < ApplicationController
     render json: @questions
   end
   def load_random_questions
-    @questions = Question.load_random(params[:amount])
+    @questions = Question.load_by_course(params[:course_id]).load_random(params[:amount])
     # @questions = Question.offset(rand(Question.count)).limit()
     render json: @questions
   end
@@ -20,6 +20,7 @@ class API::QuestionsController < ApplicationController
   # GET /questions.json
   def index
     @course = Course.find(params[:course_id])
+    @subject = Subject.find_by_id(@course.subject_id)
     @questions = Question.includes(:answers).where(course_id: @course.id)
     respond_to do |format|
       format.html
@@ -41,6 +42,7 @@ class API::QuestionsController < ApplicationController
     @course = Course.find(params[:course_id])
     @question = Question.new
     @question.answers.build
+    @action = 'new'
   end
 
   # GET /questions/1/edit

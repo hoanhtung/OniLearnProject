@@ -25,7 +25,6 @@
         <strong>Nội dung:</strong>
         <%= @question.content %> <br/>
         <strong>Loại:</strong>
-        <%= @question.type_question %>
         <% if @question.type_question == 2 %>
           Multichoice
         <% elsif @question.type_question.nil?  %>

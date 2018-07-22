@@ -254,7 +254,7 @@
                       </div>
                       <div class="col-xs-4 text-center">
                         <a href="#">Friends</a>
-                      </div>
+                      </div>  
                     </div>
                     <!-- /.row -->
                   </li>
@@ -297,15 +297,35 @@
             <% end %>
           </div>
           <!-- search form -->
-          <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-              <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                    <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                    </button>
-                  </span>
-            </div>
-          </form>
+          <% case @flag %>
+          <% when 'index_cate' %>
+            <%= form_with(url: categories_path, class: "sidebar-form", method: :get, local: true) do |f|%>
+              <div class="input-group">
+                <%= f.text_field :search_category, :class => "form-control", :placeholder => "Tên chuyên ngành..." %>
+                <span class="input-group-btn">
+                  <button class="btn btn-flat"><i class="fa fa-search"></i></button>
+                </span>
+              </div>
+            <% end %>
+          <% when 'index_subject' %>
+            <%= form_with(url: subjects_path, class: "sidebar-form", method: :get, local: true) do%>
+              <div class="input-group">
+                <%= text_field_tag :search_subject, nil, :class => "form-control", :placeholder => "Tên môn học..." %>
+                <span class="input-group-btn">
+                  <button class="btn btn-flat"><i class="fa fa-search"></i></button>
+                </span>
+              </div>
+            <% end %>
+          <% when 'index_course' %>
+            <%= form_with(url: courses_path, class: "sidebar-form", method: :get, local: true) do%>
+              <div class="input-group">
+                <%= text_field_tag :search_course, nil, :class => "form-control", :placeholder => "Tên chủ đề..." %>
+                <span class="input-group-btn">
+                  <button class="btn btn-flat"><i class="fa fa-search"></i></button>
+                </span>
+              </div>
+            <% end %>
+          <% end %>
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu" data-widget="tree">
@@ -348,8 +368,12 @@
       </aside>
 
       <!-- Content Wrapper. Contains page content -->
+      
       <div class="content-wrapper">
         <%= yield %>
+        <% if flash[:result] %>
+          <p class = "result_search"><b><%= flash[:result] %></b></p>
+        <% end %>
       </div>
       <!-- /.content-wrapper -->
       <footer class="main-footer">

@@ -8,6 +8,7 @@ class Question < ApplicationRecord
     scope :load_multichoice, -> { where(multichoice: true) }
     scope :load_true_false, -> { where(multichoice: false) }
     scope :load_random, -> (amount) { order("RANDOM()").limit(amount) }
+    scope :load_by_course, -> (course_id) { where(course_id: course_id) }
     
 
 end

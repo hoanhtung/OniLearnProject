@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     get '/new_course', to: 'courses#new_course' # tạo nhanh courses
     post '/courses', to: 'courses#create_course' # tạo nhanh courses
     #subjects
+    get '/all_subject_by_category_id', to: 'subjects#find_all_by_cate_id'
     get '/subjects', to: 'subjects#show_newest'
     get '/new_subject', to: 'subjects#new_subject' #category ko có sẵn
     post '/subjects', to: 'subjects#create_subject' #category ko có sẵn
@@ -40,18 +41,23 @@ Rails.application.routes.draw do
     # devise_scope :users do
     #   root to: 'api/user/sessions#new'
     # end
+
+    #categories
+    get '/all_categories', to: 'categories#load_categories_subjects'
+
     get '/find_by_category_id', to: 'subjects#find_all_by_cate_id'
     get '/find_by_subject_id', to: 'courses#find_all_by_sub_id'
 
     #subjects
+    get '/subject_by_id', to: 'subjects#find_subject_by_id'
     get '/subjects', to: 'subjects#show_newest'
-    get '/newest_updated_time', to: 'subjects#get_newest_updated_time'
+    get '/newest_updated_time_subject', to: 'subjects#get_newest_updated_time'
     #course
     get '/courses', to: 'courses#show_newest'
     #questions
     get '/multichoice_questions', to: 'questions#load_multichoice_questions'
     get '/true_false_questions', to: 'questions#load_true_false_questions'
-    get '/random_questions/:amount', to: 'questions#load_random_questions'
+    get '/courses/:course_id/random_questions/:amount', to: 'questions#load_random_questions'
     
     # resources :exams
     # resources :answer_details

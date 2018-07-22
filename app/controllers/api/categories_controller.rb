@@ -1,24 +1,39 @@
   class API::CategoriesController < ApplicationController
-    before_action :set_category, only: [:show, :edit, :update, :destroy]
+    before_action :set_category, only: [:edit, :update]
     before_action :authenticate_admin!, only: [:new, :create, :edit, :update]
     layout false, only: [:new, :edit]
 
     def index
-      @categories = Category.all.newest.page(params[:page]).per(5)
+      if params[:search_category]
+        all_categories = Category.search_by_name(params[:search_category])
+        @categories = all_categories.newest.page(params[:page]).per(5)
+        if all_categories.all.size == 0
+          flash[:result] = "Không tìm thấy kết quả phù hợp"
+          flash[:noti_empty] = "empty"
+        else
+          flash[:result] = "Tìm thấy #{all_categories.all.size} kết quả phù hợp"
+          flash[:noti_empty] = ""
+        end
+      else
+        #.newes
+        @categories = Category.all.newest.page(params[:page]).per(5)
+        flash[:result] = ""
+        flash[:noti_empty] = ""
+      end
+      @flag = 'index_cate'
+      respond_to do |format|
+        format.html 
+        format.json { render json: @categories.to_json(:include => :subjects), status: :ok}
+      end
+    end
+
+    def load_categories_subjects
+      @categories = Category.includes(:subjects).all
       respond_to do |format|
         format.html 
         format.json { render json: @categories.to_json(:include => :subjects)}
       end
     end
-
-    def load_categories_subjects
-      @categories = Category.include(:subjects).all
-      render json: @categories
-    end
-
-    def show
-    end
-
     def new
       @category = Category.new
       @action = 'new'
@@ -51,14 +66,6 @@
           format.html { render :edit }
           format.json { render json: @category.errors, status: :unprocessable_entity }
         end
-      end
-    end
-
-    def destroy
-      @category.destroy
-      respond_to do |format|
-        format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
-        format.json { head :no_content }
       end
     end
 

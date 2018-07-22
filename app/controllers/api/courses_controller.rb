@@ -11,7 +11,8 @@ class API::CoursesController < ApplicationController
 
   def index
     @subject = Subject.find(params[:subject_id])
-    @courses = Course.where(subject_id: @subject.id).page(params[:page]).per(5).joins(:subject)
+    @courses = Course.where(subject_id: @subject.id).newest.page(params[:page]).per(5).joins(:subject)
+    @flag = 'index_course'
     respond_to do |format|
       format.html
       format.json { render json: @courses}
@@ -19,8 +20,23 @@ class API::CoursesController < ApplicationController
   end
 
   def show_newest
-    @courses = Course.all.page(params[:page]).per(5).joins(:subject)
+    if params[:search_course]
+      all_courses = Course.search_by_name(params[:search_course])
+      @courses = all_courses.newest.page(params[:page]).per(5)
+      if all_courses.all.size == 0
+        flash[:result] = "Không tìm thấy kết quả phù hợp"
+        flash[:noti_empty] = "empty"
+      else
+        flash[:result] = "Tìm thấy #{all_courses.all.size} kết quả phù hợp"
+        flash[:noti_empty] = ""
+      end
+    else
+      @courses = Course.all.newest.page(params[:page]).per(5).joins(:subject)
+      flash[:result] = ""
+      flash[:noti_empty] = ""
+    end
     @action = 'show_newest'
+    @flag = 'index_course'
     respond_to do |format|
       format.html { render :index}
       format.json { render json: @courses}
@@ -61,12 +77,11 @@ class API::CoursesController < ApplicationController
   end
   # for creating fast course
   def create_course
-    @subject = Subject.find(params[:subject_id])
     @course = Course.create(fast_course_params)
     respond_to do |format|
       if @course.save
         format.html { redirect_to courses_path, notice: 'Course was successfully created.' }
-        format.json { render :show, status: :created, location: @course }
+        format.json { render courses_path, status: :created, location: @course }
       else
         format.html { render :new }
         format.json { render json: @course.errors, status: :unprocessable_entity }
@@ -77,8 +92,8 @@ class API::CoursesController < ApplicationController
 
   def update
     respond_to do |format|
-      if @course.update(course_params)
-        format.html { redirect_to subject_courses_path(@course.subject.id), notice: 'Course was successfully updated.' }
+      if @course.update(fast_course_params)
+        format.html { redirect_to subject_courses_path(@course.subject_id), notice: 'Course was successfully updated.' }
         format.json { render :show, status: :ok, location: @course }
       else
         format.html { render :edit }

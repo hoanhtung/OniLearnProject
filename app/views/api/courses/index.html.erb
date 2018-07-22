@@ -7,8 +7,8 @@
   <ol class="breadcrumb">
     <li><a href="/"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
     <% if @action != 'show_newest' %>
-    <li><%= link_to categories_path do %><%= @subject.category.name %><% end %></li>
-    <li><%= link_to category_subjects_path(@subject.category_id) do %><%= @subject.name %><% end %></li>
+    <li><%= link_to "#{@subject.category.name}", categories_path %></li>
+    <li><%= link_to "#{@subject.name}", category_subjects_path(@subject.category_id) %></li>
     <% end %>
     <li class="active">Các chủ đề</li>
   </ol>
@@ -17,66 +17,66 @@
 <section class="content">   
   <div class="box">
     <div class="box-header with-border">
-        <h3 class="box-title">Danh sách chủ đề</h3>
-        <% if admin_signed_in? && !current_admin.nil? %>
-          <div class="box-tools pull-right"> 
-            <% if @action == 'show_newest' %>
-              <%= link_to 'Tạo mới', new_course_path, class: 'btn btn-sm btn-primary', data: {toggle: 'modal', target: '#modal'} %>
-            <% else %>
-              <%= link_to 'Tạo mới', new_subject_course_path, class: 'btn btn-sm btn-primary', data: {toggle: 'modal', target: '#modal'} %>
-            <% end %>
-          </div>
-        <% end %>
-    </div>
-    <div class="box-body">
-    <table class="table table-consider table-striped">
-      <thead>
-        <tr>
-          <th style="width: 5%">#</th>
-          <th style="width: 20%">Tên chủ đề</th>
-          <th style="width: 20%">Mô tả</th>
-          <th style="width: 10%">Loại</th>
-          <th style="width: 10%">Môn học</th>
-          <th style="width: 10%">Số câu hỏi</th>
-          <th style="width: 25%; text-align: right">Thao tác</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @courses.each_with_index do |course, index| %>
-          <tr>
-            <td><%= index + 1 %></td>
-            <td>
-              <% if course.icon? %>
-                <%= image_tag course.icon.thumb.url, size: '20x20' %>
-              <% else %>
-                <%= image_tag 'subject.png', size: '20x20'%>
-              <% end %>
-              <%= course.name %>
-            </td>
-            <td><%= course.description %></td>
-            <td>
-              <% if course.type_course == true %>
-                Multichoice
-              <% elsif course.type_course == false %>
-                True/False
-              <% else%>
-                N/A
-              <% end %>
-            </td>
-            <td><%= course.subject.name %></td>
-            <td><%= course.questions.all.size %></td>
-            <td style="text-align: right">
-              <% if admin_signed_in? && !current_admin.nil? %>
-                <%= link_to 'Chỉnh sửa', edit_course_path(course), class: 'btn btn-sm btn-default', data: {toggle: 'modal', target: '#modal'} %>
-              <% end %>
-              <%= link_to 'Xem các câu hỏi', course_questions_path(course), class: 'btn btn-sm btn-default' %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <%= paginate @courses, theme: 'twitter-bootstrap-4', outer_window: 3 %>
+      <h3 class="box-title">Danh sách chủ đề</h3>
+      <% if admin_signed_in? && !current_admin.nil? %>
+        <div class="box-tools pull-right"> 
+          <% if @action == 'show_newest' %>
+            <%= link_to 'Tạo mới', new_course_path, class: 'btn btn-sm btn-primary', data: {toggle: 'modal', target: '#modal'} %>
+          <% else %>
+            <%= link_to 'Tạo mới', new_subject_course_path, class: 'btn btn-sm btn-primary', data: {toggle: 'modal', target: '#modal'} %>
+          <% end %>
+        </div>
+      <% end %>
   </div>
+  <% if flash[:noti_empty] != "empty" %>
+    <div class="box-body">
+      <table class="table table-consider table-striped">
+        <thead>
+          <tr>
+            <th style="width: 5%">#</th>
+            <th style="width: 20%">Tên chủ đề</th>
+            <th style="width: 10%">Loại</th>
+            <th style="width: 10%">Môn học</th>
+            <th style="width: 10%">Số câu hỏi</th>
+            <th style="width: 25%; text-align: right">Thao tác</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @courses.each_with_index do |course, index| %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td>
+                <% if course.icon? %>
+                  <%= image_tag course.icon.thumb.url, size: '20x20' %>
+                <% else %>
+                  <%= image_tag 'subject.png', size: '20x20'%>
+                <% end %>
+                <%= course.name %>
+              </td>
+              <td>
+                <% if course.type_course == true %>
+                  Multichoice
+                <% elsif course.type_course == false %>
+                  True/False
+                <% else%>
+                  N/A
+                <% end %>
+              </td>
+              <td><%= course.subject.name %></td>
+              <td><%= course.questions.all.size %></td>
+              <td style="text-align: right">
+                <%= link_to 'Xem các câu hỏi', course_questions_path(course), class: 'btn btn-sm btn-default' %>
+                <% if admin_signed_in? && !current_admin.nil? %>
+                  <%= link_to 'Chỉnh sửa', edit_course_path(course), class: 'btn btn-sm btn-default', data: {toggle: 'modal', target: '#modal'} %>
+                <% end %>              
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @courses, theme: 'twitter-bootstrap-4', outer_window: 3 %>
+    </div>
+  <% end %>
 </div>
 </section>
