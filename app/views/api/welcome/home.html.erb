@@ -17,18 +17,30 @@
         </div>
         <div class="box-body">
             <div class="row">
-                <%= link_to categories_path, class: "btn btn-app" do %>
-                    <i class="fa fa-play"></i>
-                    Quản lý chuyên ngành
-                <% end %>
-                <%= link_to subjects_path, class: "btn btn-app" do %>
-                    <i class="fa fa-play"></i>
-                    Quản lý môn học
-                <% end %>
-                <%= link_to users_path, class: "btn btn-app" do %>
-                    <i class="fa fa-play"></i>
-                    Quản lý người dùng
-                <% end %>
+                <div class="col-lg-3 col-sm-6 col-xs-12" style="margin-bottom: 10px">
+                    <%= link_to categories_path, class: "btn btn-app", style: "width: 90%" do %>
+                        <i class="fa fa-play"></i>
+                        Quản lý chuyên ngành
+                    <% end %>
+                </div>
+                <div class="col-lg-3 col-sm-6 col-xs-12" style="margin-bottom: 10px">
+                    <%= link_to subjects_path, class: "btn btn-app", style: "width: 90%" do %>
+                        <i class="fa fa-play"></i>
+                        Quản lý môn học
+                    <% end %>
+                </div>
+                <div class="col-lg-3 col-sm-6 col-xs-12" style="margin-bottom: 10px">
+                    <%= link_to subjects_path, class: "btn btn-app", style: "width: 90%" do %>
+                        <i class="fa fa-play"></i>
+                        Quản lý chủ đề *
+                    <% end %>
+                </div>
+                <div class="col-lg-3 col-sm-6 col-xs-12" style="margin-bottom: 10px">
+                    <%= link_to users_path, class: "btn btn-app", style: "width: 90%" do %>
+                        <i class="fa fa-play"></i>
+                        Quản lý người dùng
+                    <% end %>
+                </div>
             </div>
         </div>
     </div>
