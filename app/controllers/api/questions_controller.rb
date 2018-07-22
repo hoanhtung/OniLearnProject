@@ -15,6 +15,14 @@ class API::QuestionsController < ApplicationController
     # @questions = Question.offset(rand(Question.count)).limit()
     render json: @questions
   end
+  def load_random_multichoice_questions
+    @questions = Question.load_by_course(params[:course_id]).load_multichoice.load_random(params[:amount])
+    render json: @questions.to_json(:include => :answers)
+  end
+  def load_random_true_false_questions
+    @questions = Question.load_by_course(params[:course_id]).load_true_false.load_random(params[:amount])
+    render json: @questions.to_json(:include => :answers)
+  end
 
   # GET /questions
   # GET /questions.json
