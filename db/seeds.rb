@@ -27,17 +27,17 @@ subject = Subject.create([{ name: 'Đại số', category_id: 6}])
 
 
 for i in 0..5
-    course = Course.create([{ name: "Đạo đức 0#{i} C++", subject_id: 1 }])
+    course = Course.create([{ name: "Đạo đức 0#{i}", subject_id: 1 }])
 end
 for i in 0..5
-    course = Course.create([{ name: "Tiếng việt 0#{i} C##", subject_id: 2 }])
+    course = Course.create([{ name: "Tiếng việt 0#{i}", subject_id: 2 }])
 end
 for i in 0..5
-    course = Course.create([{ name: "Khoa học 0#{i} HCI", subject_id: 3 }])
+    course = Course.create([{ name: "Khoa học 0#{i}", subject_id: 3 }])
 end
 for i in 0..5
-    course = Course.create([{ name: "Chính tả 0#{i} ACC", subject_id: 4 }])
+    course = Course.create([{ name: "Chính tả 0#{i}", subject_id: 4 }])
 end
 for i in 0..5
-    course = Course.create([{ name: "KHXH 0#{i} GUI", subject_id: 5 }])
+    course = Course.create([{ name: "KHXH 0#{i}", subject_id: 5 }])
 end

@@ -58,6 +58,8 @@ Rails.application.routes.draw do
     get '/multichoice_questions', to: 'questions#load_multichoice_questions'
     get '/true_false_questions', to: 'questions#load_true_false_questions'
     get '/courses/:course_id/random_questions/:amount', to: 'questions#load_random_questions'
+    get '/courses/:course_id/random_multichoice_questions/:amount', to: 'questions#load_random_multichoice_questions'
+    get '/courses/:course_id/random_true_false_questions/:amount', to: 'questions#load_random_true_false_questions'
     
     # resources :exams
     # resources :answer_details
