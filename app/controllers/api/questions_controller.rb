@@ -28,7 +28,7 @@ class API::QuestionsController < ApplicationController
   def index
     @course = Course.find(params[:course_id])
     @subject = Subject.find_by_id(@course.subject_id)
-    @questions = Question.includes(:answers).where(course_id: @course.id).newest
+    @questions = Question.includes(:answers).where(course_id: @course.id).newest.page(params[:page]).per(5)
     respond_to do |format|
       format.html
       format.json { render json: @questions.to_json(:include => :answers) }
@@ -82,7 +82,7 @@ class API::QuestionsController < ApplicationController
     respond_to do |format|
       if @question.update_attributes(question_params) 
         # && @question.answers.find()update_attributes(answer_params)
-        format.html { redirect_to @question, notice: 'Question was successfully updated.' }
+        format.html { redirect_to course_questions_path(@question.course_id), notice: 'Question was successfully updated.' }
         format.json { render :show, status: :ok, location: @question }
       else
         format.html { render :edit }

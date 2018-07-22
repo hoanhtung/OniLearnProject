@@ -67,10 +67,26 @@ function getCourseBySubId(id) {
         }
     })
 }
+//Edit
+function getAmountAnswersOfQuestion() {
+    $.ajax({
+        url: '/get_amount_answers',
+        method: 'get',
+        success: function(data) {
+            
+        }
 
-var index = 1;
-function appendNewAnswerInput() {
-    index += 1;
+    })
+}
+
+function getCount() {
+    return $("#answer_field").children().length;
+}
+
+function appendForActionNewAnswer() {
+    appendNewAnswerInput(getCount());
+}
+function appendNewAnswerInput(index) {
     var div = '<div class="field row" style="margin-top: 20px">';
     var new_answer_field = '<div class="col-xs-9 col-sm-10 col-md-11"><textarea name="question[answers_attributes]['+ index +'][content]" class="form-control"></textarea></div>';
     var checkbox_answer = '<div class="col-xs-3 col-sm-2 col-md-1"><input type="checkbox" name="question[answers_attributes][' + index + '][is_right]" style="margin: 2px">';
@@ -80,6 +96,8 @@ function appendNewAnswerInput() {
     div += remove_answer_btn;
     div += '</div>';
     $("#answer_field").append(div);
+    index += 1;
+    
 }
 function removeAnswerField(event) {
     $(event.target).closest('.field').remove();

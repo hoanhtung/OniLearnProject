@@ -52,9 +52,9 @@
                   <!-- Menu Body -->
                   <!-- Menu Footer-->
                   <li class="user-footer">
-                    <div class="pull-right">
+                    <div class="pull-center" style="text-align: center">
                       <%= link_to "Đăng xuất", destroy_admin_session_path, method: 'delete',
-                      class: "btn btn-default btn-flat" %>
+                      class: "btn btn-primary btn-flat" %>
                     </div>
                   </li>
                 </ul>
@@ -109,6 +109,15 @@
             <%= form_with(url: courses_path, class: "sidebar-form", method: :get, local: true) do%>
               <div class="input-group">
                 <%= text_field_tag :search_course, nil, :class => "form-control", :placeholder => "Tên chủ đề..." %>
+                <span class="input-group-btn">
+                  <button class="btn btn-flat"><i class="fa fa-search"></i></button>
+                </span>
+              </div>
+            <% end %>
+          <% when 'index_user' %>
+            <%= form_with(url: users_path, class: "sidebar-form", method: :get, local: true) do%>
+              <div class="input-group">
+                <%= text_field_tag :search_course, nil, :class => "form-control", :placeholder => "Tên người dùng..." %>
                 <span class="input-group-btn">
                   <button class="btn btn-flat"><i class="fa fa-search"></i></button>
                 </span>

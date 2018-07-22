@@ -10,6 +10,6 @@ class Question < ApplicationRecord
     scope :load_random, -> (amount) { order("RANDOM()").limit(amount) }
     scope :load_by_course, -> (course_id) { where(course_id: course_id) }
     
-    scope :newest, -> { order(created_at: :desc) }
+    scope :newest, -> { order(updated_at: :desc) }
 
 end

@@ -7,7 +7,7 @@ class Subject < ApplicationRecord
     validates_processing_of :image
     validate :image_size_validation
     #scope
-    scope :newest, -> { order(created_at: :desc) }
+    scope :newest, -> { order(updated_at: :desc) }
     scope :search_by_name, -> (search_name) { where("name LIKE ?", "%#{search_name}%") }
 
 
