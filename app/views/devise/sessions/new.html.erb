@@ -4,12 +4,16 @@
 	<title>Login V2</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
+	<link rel="stylesheet" type="text/css" href="../assets/bootstrap-min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/login/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/login/material-design-iconic-font.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/login/animate.css">
+	<link rel="stylesheet" type="text/css" href="../assets/login/hamburgers.css">
+	<link rel="stylesheet" type="text/css" href="../assets/login/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/login/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/login/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="../assets/login/util.css">
+	<link rel="stylesheet" type="text/css" href="../assets/login/main.css">
 </head>
 <body>
 	<div class="login">
@@ -39,6 +43,7 @@
 							<%= f.password_field :password, autocomplete: "off", class: "input100" %>
 							<span class="focus-input100" data-placeholder="Password"></span>
 						</div>
+						
 						<!-- Login button -->	
 						<div class="container-login100-form-btn">
 							<div class="wrap-login100-form-btn">
@@ -48,11 +53,23 @@
 								</button>
 							</div>
 						</div>
+
+						<div style="height: 50px"></div>
 					<% end %>
 				</div>
 			</div>
 		</div>
 		<div id="dropDownSelect1"></div>
 	</div>
+
+	<script src="../assets/login/jquery-3.2.1.min.js"></script>
+	<script src="../assets/login/animsition.min.js"></script>
+	<script src="../assets/login/popper.js"></script>
+	<script src="../assets/bootstrap.min.js"></script>
+	<script src="../assets/login/select2.min.js"></script>
+	<script src="../assets/login/moment.min.js"></script>
+	<script src="../assets/login/daterangepicker.js"></script>
+	<script src="../assets/login/countdowntime.js"></script>
+	<script src="../assets/login/main.js"></script>
 </body>
 </html>

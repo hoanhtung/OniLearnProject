@@ -21,4 +21,10 @@
 //= require jquery-ui
 //= require wysihtml5
 //= require adminLTE
+//= require login/animsition.min
+//= require login/popper
+//= require login/select2.min
+//= require login/moment.min
+//= require login/daterangepicker
+//= require login/countdowntime
 // = require_tree .
