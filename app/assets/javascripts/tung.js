@@ -23,11 +23,11 @@ function getCategories() {
         success: function(data) {
             $('#category_select_div').empty();
             $('#category_select_div').append("<select class='form-control' id='category_select' onchange='getSubjectByCateId(this.options[this.selectedIndex].value)'>")
-            for (i = 0; i < data.categories.length; i++) {
-                if (data.categories[i].id == cate_id ) {
-                    $('#category_select').append("<option selected='selected' value="+ data.categories[i].id+ ">"+ data.categories[i].name + "</option>")
+            for (i = 0; i < data.length; i++) {
+                if (data[i].id == cate_id ) {
+                    $('#category_select').append("<option selected='selected' value="+ data[i].id+ ">"+ data[i].name + "</option>")
                 } else {
-                    $('#category_select').append("<option value="+ data.categories[i].id+ ">"+ data.categories[i].name + "</option>")
+                    $('#category_select').append("<option value="+ data[i].id+ ">"+ data[i].name + "</option>")
                 }
             }
             $('#category_select_div').append("</select>")       

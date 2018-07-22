@@ -30,7 +30,7 @@
       @categories = Category.includes(:subjects).all
       respond_to do |format|
         format.html 
-        format.json { render json: @categories.to_json(:include => :subjects) }
+        format.json { render :json => @categories.to_json(:include => :subjects), status: :ok }
       end
     end
     def new
