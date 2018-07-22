@@ -28,7 +28,7 @@ class API::QuestionsController < ApplicationController
   def index
     @course = Course.find(params[:course_id])
     @subject = Subject.find_by_id(@course.subject_id)
-    @questions = Question.includes(:answers).where(course_id: @course.id)
+    @questions = Question.includes(:answers).where(course_id: @course.id).newest
     respond_to do |format|
       format.html
       format.json { render json: @questions.to_json(:include => :answers) }
@@ -65,7 +65,7 @@ class API::QuestionsController < ApplicationController
     @question = @course.questions.create(question_params)
     respond_to do |format|
       if @question.save
-        format.html { redirect_to @question, notice: 'Question was successfully created.' }
+        format.html { redirect_to course_questions_path(@course.id), notice: 'Question was successfully created.' }
         format.json { render :show, status: :created, location: @question }
       else
         format.html { render :new }
@@ -96,7 +96,7 @@ class API::QuestionsController < ApplicationController
   def destroy
     @question.destroy
     respond_to do |format|
-      format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
+      format.html { redirect_to course_questions_path(@question.course_id), notice: 'Question was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

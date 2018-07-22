@@ -47,11 +47,10 @@
                 <tr>
                     <td>
                       <% if ans.is_right == true%>
-                        <span style="margin-right: 10px;" class="label label-success"><%= ans.is_right %></span>
+                        <span style="margin-right: 10px; width: 10%" class="label label-success"><%= ans.is_right %></span>
                       <% end %>
                     </td>
-                    <!--  style="text-align: center; background-color: #41c300; border-radius: 8px" -->
-                    <td style="border-bottom: 1px solid #41c300"><%= ans.content %></td>
+                    <td style="border-bottom: 1px solid #41c300; ; width: 90%"><%= ans.content %></td>
                 </tr>
               <% end %>
             </table>
