@@ -65,6 +65,7 @@ Rails.application.routes.draw do
     # resources :answer_details
     # resources :exam_details
     # resources :users
+    resources :sessions, only: [:create, :destroy]
     resources :users
     resources :categories, only: [:index, :show, :update, :create], shallow: true do
       resources :subjects, only: [:index, :show, :update, :create], shallow: true do

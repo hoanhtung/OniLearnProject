@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
+
+
+    # acts_as_token_authentication_handler_for User
     # before_action :authenticate_admin!
     
     # skip_before_action :verify_authenticity_token
