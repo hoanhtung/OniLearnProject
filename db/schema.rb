@@ -31,10 +31,10 @@ ActiveRecord::Schema.define(version: 2018_07_22_143804) do
 
   create_table "answer_details", force: :cascade do |t|
     t.integer "exam_detail_id"
-    t.integer "answer_id"
+    t.integer "answer_id_user"
+    t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["answer_id"], name: "index_answer_details_on_answer_id"
     t.index ["exam_detail_id"], name: "index_answer_details_on_exam_detail_id"
   end
 
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 2018_07_22_143804) do
     t.integer "exam_id"
     t.integer "question_id"
     t.decimal "mark_question"
+    t.boolean "user_is_right"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["exam_id"], name: "index_exam_details_on_exam_id"

@@ -5,11 +5,11 @@ class API::UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = ::User.all.newest.page(params[:page]).per(5)
+    @users = ::User.includes(:exams).all.newest.page(params[:page]).per(5)
     @flag = 'index_user'
     respond_to do |format|
       format.html 
-      format.json { render json: @users}
+      format.json { render json: @users, status: :ok}
     end
   end
 

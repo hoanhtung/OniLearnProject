@@ -20,7 +20,9 @@ Rails.application.routes.draw do
     get '/subjects', to: 'subjects#show_newest'
     get '/new_subject', to: 'subjects#new_subject' #category ko có sẵn
     post '/subjects', to: 'subjects#create_subject' #category ko có sẵn
-    resources :users
+    resources :users, concerns: :paginatable, only: [:index, :created] do
+      resources :exams, concerns: :paginatable, only: [:index, :created]
+    end
     resources :categories, concerns: :paginatable, only: [:index, :edit, :update, :new, :create], shallow: true do
       resources :subjects, concerns: :paginatable, only: [:index, :edit, :update, :new, :create], shallow: true do
         resources :courses, concerns: :paginatable, shallow: true do
@@ -33,14 +35,6 @@ Rails.application.routes.draw do
   end
   #API
   scope module: 'api', path: 'api', defaults: {format: :json} do
-    # devise_for :users , :controllers => {
-    #   :omniauth_callbacks => "api/user/omniauth_callbacks",
-    #   :sessions => "api/user/sessions",
-    #   :registrations => "api/user/registrations"
-    # }   
-    # devise_scope :users do
-    #   root to: 'api/user/sessions#new'
-    # end
 
     #categories
     get '/all_categories', to: 'categories#load_categories_subjects'
@@ -66,7 +60,12 @@ Rails.application.routes.draw do
     # resources :exam_details
     # resources :users
     resources :sessions, only: [:create, :destroy]
-    resources :users
+
+    resources :users, only: [:index, :create] do
+      resources :exams, only: [:index]
+    end
+    post '/exams', to: 'exams#create'
+
     resources :categories, only: [:index, :show, :update, :create], shallow: true do
       resources :subjects, only: [:index, :show, :update, :create], shallow: true do
         resources :courses, only: [:index, :show, :update, :create], shallow: true do

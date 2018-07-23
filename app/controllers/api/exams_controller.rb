@@ -1,4 +1,5 @@
 class API::ExamsController < ApplicationController
+  skip_before_action :verify_authenticity_token  
   before_action :set_exam, only: [:show, :edit, :update, :destroy]
 
   # GET /exams
@@ -24,16 +25,16 @@ class API::ExamsController < ApplicationController
   # POST /exams
   # POST /exams.json
   def create
-    @exam = Exam.new(exam_params)
-
-    respond_to do |format|
+    @user = ::User.find_by_authentication_token(params[:authentication_token])
+    params[:user_id] = @user.id
+    @exam = @user.exams.create(exam_params_api)
       if @exam.save
-        format.html { redirect_to @exam, notice: 'Exam was successfully created.' }
-        format.json { render :show, status: :created, location: @exam }
+        # format.html { redirect_to @exam, notice: 'Exam was successfully created.' }
+        render json: { info: @exam, status: :created }
       else
-        format.html { render :new }
-        format.json { render json: @exam.errors, status: :unprocessable_entity }
-      end
+        # format.html { render :new }
+        render json: { info: @exam.errors, status: :unprocessable_entity }
+        
     end
   end
 
@@ -70,5 +71,8 @@ class API::ExamsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def exam_params
       params.fetch(:exam, {})
+    end
+    def exam_params_api
+      params.permit(:total_mark, :user_id, exam_details_attributes: [:id, :question_id, :mark_question, :user_is_right])
     end
 end
