@@ -2,8 +2,16 @@ class API::ExamDetailsController < ApplicationController
   before_action :set_exam_detail, only: [:show, :edit, :update, :destroy]
 
   def index
+    @question_of_exams = Array.new
     @exam = Exam.find_by_id(params[:exam_id])
     @exam_details = ExamDetail.includes(:answer_details).where(exam_id: @exam.id).joins(:question)
+    @exam_details.each do |exam_detail|
+      question = Question.includes(:answers).find_by_id(exam_detail.question_id)
+      element = {mark: exam_detail.mark_question, correct: exam_detail.user_is_right,  content: exam_detail.question.content, type: exam_detail.question.type_question, answers: question.answers.all}
+      @question_of_exams.push(element)
+    end
+      
+    # @questions = @exam_details.question
   end
 
   def show
