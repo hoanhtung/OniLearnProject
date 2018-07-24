@@ -54,7 +54,8 @@ Rails.application.routes.draw do
     get '/courses/:course_id/random_questions/:amount', to: 'questions#load_random_questions'
     get '/courses/:course_id/random_multichoice_questions/:amount', to: 'questions#load_random_multichoice_questions'
     get '/courses/:course_id/random_true_false_questions/:amount', to: 'questions#load_random_true_false_questions'
-    
+    #exams
+    post 'info_of_exams_by_user', to: 'exams#info_of_exams'
     # resources :exams
     # resources :answer_details
     # resources :exam_details

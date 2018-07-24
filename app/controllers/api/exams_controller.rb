@@ -2,29 +2,32 @@ class API::ExamsController < ApplicationController
   skip_before_action :verify_authenticity_token  
   before_action :set_exam, only: [:show, :edit, :update, :destroy]
 
-  # GET /exams
-  # GET /exams.json
   def index
     @user = ::User.find_by_id(params[:user_id])
     @exams = Exam.includes(:exam_details).where(user_id: @user.id).newest.page(params[:page]).per(5)
   end
 
-  # GET /exams/1
-  # GET /exams/1.json
+  def info_of_exams
+    @user = ::User.find_by_authentication_token(params[:authentication_token])
+    if @user
+      @exams = Exam.where(user_id: @user.id)
+      total_mark_of_exam = @exams.sum(:total_mark)
+      render json: { name_user: @user.name, amount_of_exams: @exams.all.size, total_mark: total_mark_of_exam, status: :ok }
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
+  end
+
   def show
   end
 
-  # GET /exams/new
   def new
     @exam = Exam.new
   end
 
-  # GET /exams/1/edit
   def edit
   end
 
-  # POST /exams
-  # POST /exams.json
   def create
     @user = ::User.find_by_authentication_token(params[:authentication_token])
     params[:user_id] = @user.id
@@ -81,7 +84,7 @@ class API::ExamsController < ApplicationController
       params.fetch(:exam, {})
     end
     def exam_params
-      params.require(:exam).permit(:total_mark, :user_id)
+      params.require(:exam).permit(:total_mark, :course_id, :user_id)
     end
     def exam_details_params
       params.permit(:exam_id, :question_id, :mark_question, :user_is_right)

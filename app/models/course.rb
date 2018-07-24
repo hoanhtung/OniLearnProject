@@ -1,6 +1,7 @@
 class Course < ApplicationRecord
     has_many :questions
     belongs_to :subject
+    has_many :exams
 
     mount_uploader :icon, ImageUploader
     validates_processing_of :icon

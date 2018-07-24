@@ -47,7 +47,7 @@ class API::SubjectsController < ApplicationController
 
   def index
     @category = Category.find(params[:category_id])
-    @subjects = Subject.where(category_id: @category.id).page(params[:page]).per(5)
+    @subjects = Subject.where(category_id: @category.id).newest.page(params[:page]).per(5)
     @flag = 'index_subject'
     respond_to do |format|
       format.html { render :index, locals: {category: @category}}

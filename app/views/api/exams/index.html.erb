@@ -37,9 +37,9 @@
             <% @exams.each_with_index do |exam, index| %>
               <tr>
                 <td><%= index + 1 %></td>
-                <td><%= exam.created_at.strftime("%b %d, %Y") %></td>
+                <td><%= exam.created_at.strftime("%Hh%M %b %d, %Y") %></td>
                 <td><%= exam.total_mark %></td>
-                <td><%= exam.total_mark %></td>
+                <td><%= exam.exam_details.where(user_is_right: true).size %>/<%= exam.exam_details.all.size %></td>
                 <td style="text-align: right">
                   <%= link_to 'Xem chi tiết', "", class: "btn btn-sm btn-default" %>
                 </td>

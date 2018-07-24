@@ -5,6 +5,7 @@ class CreateExams < ActiveRecord::Migration[5.2]
       t.integer :user_id
       
       t.belongs_to :user
+      t.belongs_to :course
       t.timestamps
     end
   end

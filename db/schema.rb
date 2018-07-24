@@ -78,8 +78,10 @@ ActiveRecord::Schema.define(version: 2018_07_22_143804) do
   create_table "exams", force: :cascade do |t|
     t.decimal "total_mark"
     t.integer "user_id"
+    t.integer "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_exams_on_course_id"
     t.index ["user_id"], name: "index_exams_on_user_id"
   end
 
