@@ -4,7 +4,7 @@ class API::ExamsController < ApplicationController
 
   def index
     @user = ::User.find_by_id(params[:user_id])
-    @exams = Exam.includes(:exam_details).where(user_id: @user.id).newest.page(params[:page]).per(5)
+    @exams = Exam.includes(:exam_details).where(user_id: @user.id).newest.page(params[:page]).per(5).joins(:course)
   end
 
   def info_of_exams

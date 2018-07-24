@@ -20,8 +20,10 @@ Rails.application.routes.draw do
     get '/subjects', to: 'subjects#show_newest'
     get '/new_subject', to: 'subjects#new_subject' #category ko có sẵn
     post '/subjects', to: 'subjects#create_subject' #category ko có sẵn
-    resources :users, concerns: :paginatable, only: [:index, :created] do
-      resources :exams, concerns: :paginatable, only: [:index, :created]
+    resources :users, concerns: :paginatable, only: [:index], shallow: true do
+      resources :exams, concerns: :paginatable, only: [:index] do
+        resources :exam_details, only: [:index]
+      end
     end
     resources :categories, concerns: :paginatable, only: [:index, :edit, :update, :new, :create], shallow: true do
       resources :subjects, concerns: :paginatable, only: [:index, :edit, :update, :new, :create], shallow: true do

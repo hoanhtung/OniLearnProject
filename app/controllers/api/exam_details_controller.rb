@@ -4,7 +4,8 @@ class API::ExamDetailsController < ApplicationController
   # GET /exam_details
   # GET /exam_details.json
   def index
-    @exam_details = ExamDetail.all
+    @exam = Exam.find_by_id(params[:exam_id])
+    @exam_details = ExamDetail.includes(:answer_details).where(exam_id: @exam.id).joins(:question)
   end
 
   # GET /exam_details/1
