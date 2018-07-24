@@ -62,7 +62,7 @@ Rails.application.routes.draw do
     resources :sessions, only: [:create, :destroy]
 
     resources :users, only: [:index, :create] do
-      resources :exams, only: [:index]
+      resources :exams, only: [:index, :create]
     end
     post '/exams', to: 'exams#create'
 
