@@ -41,7 +41,7 @@ class API::SubjectsController < ApplicationController
     @flag = 'index_subject'
     respond_to do |format|
       format.html { render :index}
-      format.json { render json: @subjects}
+      format.json { render json: @subjects.to_json(:include => :course), status: :ok}
     end
   end
 
