@@ -5,7 +5,8 @@ class API::ExamsController < ApplicationController
   # GET /exams
   # GET /exams.json
   def index
-    @exams = Exam.all
+    @user = ::User.find_by_id(params[:user_id])
+    @exams = Exam.includes(:exam_details).where(user_id: @user.id).newest.page(params[:page]).per(5)
   end
 
   # GET /exams/1
@@ -27,19 +28,30 @@ class API::ExamsController < ApplicationController
   def create
     @user = ::User.find_by_authentication_token(params[:authentication_token])
     params[:user_id] = @user.id
-    @exam = @user.exams.create(exam_params_api)
-      if @exam.save
-        # format.html { redirect_to @exam, notice: 'Exam was successfully created.' }
-        render json: { info: @exam, status: :created }
-      else
-        # format.html { render :new }
-        render json: { info: @exam.errors, status: :unprocessable_entity }
-        
+    @exam = @user.exams.build(exam_params)
+    params[:exam_id] = @exam.id
+    params[:exam_details].each do |item|
+      params[:exam_id] = @exam.id
+      params[:question_id] = item[:question_id]
+      params[:mark_question] = item[:mark_question]
+      params[:user_is_right] = item[:user_is_right]
+      @exam_detail = @exam.exam_details.build(exam_details_params)
+
+      item[:answer_details].each do |answer_item|
+        params[:exam_detail_id] = @exam_detail.id
+        params[:answer_id_user] = answer_item[:answer_id_user]
+        @answer_detail = @exam_detail.answer_details.build(answer_details_params)
+      end
+    end
+    if @exam.save 
+      # format.html { redirect_to @exam, notice: 'Exam was successfully created.' }
+      render json: { info: @exam.to_json(:include => :exam_details), status: :created }
+    else
+      format.html { render :new }
+      render json: { info: @exam.errors, status: :unprocessable_entity }        
     end
   end
 
-  # PATCH/PUT /exams/1
-  # PATCH/PUT /exams/1.json
   def update
     respond_to do |format|
       if @exam.update(exam_params)
@@ -52,8 +64,6 @@ class API::ExamsController < ApplicationController
     end
   end
 
-  # DELETE /exams/1
-  # DELETE /exams/1.json
   def destroy
     @exam.destroy
     respond_to do |format|
@@ -63,16 +73,20 @@ class API::ExamsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_exam
       @exam = Exam.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def exam_params
       params.fetch(:exam, {})
     end
-    def exam_params_api
-      params.permit(:total_mark, :user_id, exam_details_attributes: [:id, :question_id, :mark_question, :user_is_right])
+    def exam_params
+      params.require(:exam).permit(:total_mark, :user_id)
+    end
+    def exam_details_params
+      params.permit(:exam_id, :question_id, :mark_question, :user_is_right)
+    end
+    def answer_details_params
+      params.permit(:exam_detail_id, :answer_id_user)
     end
 end

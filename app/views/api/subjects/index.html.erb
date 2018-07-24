@@ -7,7 +7,7 @@
   <ol class="breadcrumb">
     <li><a href="/"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
     <% if @action != 'show_newest' %>
-      <li class="active"><%= link_to categories_path do %><%= @category.name %><% end %></li>
+      <li><%= link_to categories_path do %><%= @category.name %><% end %></li>
     <% end %>
     <li class="active">Các môn học</li>
   </ol>

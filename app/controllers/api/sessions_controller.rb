@@ -10,7 +10,7 @@ class API::SessionsController < ApplicationController
   end
 
   def destroy
-      admin = Admin.find_by(auth_token: params[:id])
+      admin = ::User.find_by(authentication_token: params[:id])
       admin.generate_authentication_token!
       admin.save
       head 204
