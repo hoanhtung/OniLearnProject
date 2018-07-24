@@ -1,15 +1,18 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Exam Details</h1>
+<h1>Bài kiểm tra số <%= @exam.id %></h1>
 
 <table>
     <% @exam_details.each_with_index do |exam_detail, index| %>
       <tr>
         <td>Câu hỏi <%= index + 1 %>: </td>
-        <td> </td>
+        <td></td>
       </tr>
       <tr>
         <td><%= exam_detail.question.content %> </td>
       </tr>
+      <% exam_detail.each_with_index do |answer_detail, index| %>
+        <tr>
+          <td><%= exam_detail.answer_detail.content %> </td>
+        </tr>
+      <% end %>
     <% end %>
 </table>

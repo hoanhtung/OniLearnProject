@@ -39,11 +39,12 @@ class API::ExamsController < ApplicationController
       params[:mark_question] = item[:mark_question]
       params[:user_is_right] = item[:user_is_right]
       @exam_detail = @exam.exam_details.build(exam_details_params)
-
-      item[:answer_details].each do |answer_item|
-        params[:exam_detail_id] = @exam_detail.id
-        params[:answer_id_user] = answer_item[:answer_id_user]
-        @answer_detail = @exam_detail.answer_details.build(answer_details_params)
+      if params[:answer_details]
+        item[:answer_details].each do |answer_item|
+          params[:exam_detail_id] = @exam_detail.id
+          params[:answer_id_user] = answer_item[:answer_id_user]
+          @answer_detail = @exam_detail.answer_details.build(answer_details_params)
+        end
       end
     end
     if @exam.save 
