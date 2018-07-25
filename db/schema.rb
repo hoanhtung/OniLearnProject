@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_03_084225) do
+ActiveRecord::Schema.define(version: 2018_07_22_143804) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -25,18 +25,16 @@ ActiveRecord::Schema.define(version: 2018_07_03_084225) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "auth_token", default: ""
-    t.index ["auth_token"], name: "index_admins_on_auth_token", unique: true
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
   create_table "answer_details", force: :cascade do |t|
     t.integer "exam_detail_id"
-    t.integer "answer_id"
+    t.integer "answer_id_user"
+    t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["answer_id"], name: "index_answer_details_on_answer_id"
     t.index ["exam_detail_id"], name: "index_answer_details_on_exam_detail_id"
   end
 
@@ -70,6 +68,7 @@ ActiveRecord::Schema.define(version: 2018_07_03_084225) do
     t.integer "exam_id"
     t.integer "question_id"
     t.decimal "mark_question"
+    t.boolean "user_is_right"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["exam_id"], name: "index_exam_details_on_exam_id"
@@ -79,8 +78,10 @@ ActiveRecord::Schema.define(version: 2018_07_03_084225) do
   create_table "exams", force: :cascade do |t|
     t.decimal "total_mark"
     t.integer "user_id"
+    t.integer "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_exams_on_course_id"
     t.index ["user_id"], name: "index_exams_on_user_id"
   end
 
@@ -118,6 +119,8 @@ ActiveRecord::Schema.define(version: 2018_07_03_084225) do
     t.string "last_sign_in_ip"
     t.string "provider"
     t.string "uid"
+    t.string "authentication_token", limit: 30
+    t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

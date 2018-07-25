@@ -1,28 +1,29 @@
 class API::ExamDetailsController < ApplicationController
   before_action :set_exam_detail, only: [:show, :edit, :update, :destroy]
 
-  # GET /exam_details
-  # GET /exam_details.json
   def index
-    @exam_details = ExamDetail.all
+    @question_of_exams = Array.new
+    @exam = Exam.find_by_id(params[:exam_id])
+    @exam_details = ExamDetail.includes(:answer_details).where(exam_id: @exam.id).joins(:question)
+    @exam_details.each do |exam_detail|
+      question = Question.includes(:answers).find_by_id(exam_detail.question_id)
+      element = {mark: exam_detail.mark_question, correct: exam_detail.user_is_right,  content: exam_detail.question.content, type: exam_detail.question.type_question, answers: question.answers.all}
+      @question_of_exams.push(element)
+    end
+      
+    # @questions = @exam_details.question
   end
 
-  # GET /exam_details/1
-  # GET /exam_details/1.json
   def show
   end
 
-  # GET /exam_details/new
   def new
     @exam_detail = ExamDetail.new
   end
 
-  # GET /exam_details/1/edit
   def edit
   end
 
-  # POST /exam_details
-  # POST /exam_details.json
   def create
     @exam_detail = ExamDetail.new(exam_detail_params)
 
@@ -37,8 +38,6 @@ class API::ExamDetailsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /exam_details/1
-  # PATCH/PUT /exam_details/1.json
   def update
     respond_to do |format|
       if @exam_detail.update(exam_detail_params)
@@ -51,8 +50,6 @@ class API::ExamDetailsController < ApplicationController
     end
   end
 
-  # DELETE /exam_details/1
-  # DELETE /exam_details/1.json
   def destroy
     @exam_detail.destroy
     respond_to do |format|
@@ -62,12 +59,10 @@ class API::ExamDetailsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_exam_detail
       @exam_detail = ExamDetail.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def exam_detail_params
       params.fetch(:exam_detail, {})
     end

@@ -28,55 +28,59 @@
         </div>
       <% end %>
   </div>
-  <% if flash[:noti_empty] != "empty" %>
-    <div class="box-body">
-      <table class="table table-consider table-striped">
-        <thead>
-          <tr>
-            <th style="width: 5%">#</th>
-            <th style="width: 20%">Tên chủ đề</th>
-            <th style="width: 10%">Loại</th>
-            <th style="width: 10%">Môn học</th>
-            <th style="width: 10%">Số câu hỏi</th>
-            <th style="width: 25%; text-align: right">Thao tác</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% @courses.each_with_index do |course, index| %>
+  <% if @courses.all.size != 0 %>
+    <% if flash[:noti_empty] != "empty" %>
+      <div class="box-body">
+        <table class="table table-consider table-striped">
+          <thead>
             <tr>
-              <td><%= index + 1 %></td>
-              <td>
-                <% if course.icon? %>
-                  <%= image_tag course.icon.thumb.url, size: '20x20' %>
-                <% else %>
-                  <%= image_tag 'subject.png', size: '20x20'%>
-                <% end %>
-                <%= course.name %>
-              </td>
-              <td>
-                <% if course.type_course == true %>
-                  Multichoice
-                <% elsif course.type_course == false %>
-                  True/False
-                <% else%>
-                  N/A
-                <% end %>
-              </td>
-              <td><%= course.subject.name %></td>
-              <td><%= course.questions.all.size %></td>
-              <td style="text-align: right">
-                <%= link_to 'Xem các câu hỏi', course_questions_path(course), class: 'btn btn-sm btn-default' %>
-                <% if admin_signed_in? && !current_admin.nil? %>
-                  <%= link_to 'Chỉnh sửa', edit_course_path(course), class: 'btn btn-sm btn-default', data: {toggle: 'modal', target: '#modal'} %>
-                <% end %>              
-              </td>
+              <th style="width: 5%">#</th>
+              <th style="width: 20%">Tên chủ đề</th>
+              <th style="width: 10%">Loại</th>
+              <th style="width: 10%">Môn học</th>
+              <th style="width: 10%">Số câu hỏi</th>
+              <th style="width: 25%; text-align: right">Thao tác</th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
-      <%= paginate @courses, theme: 'twitter-bootstrap-4', outer_window: 3 %>
-    </div>
+          </thead>
+
+          <tbody>
+            <% @courses.each_with_index do |course, index| %>
+              <tr>
+                <td><%= index + 1 %></td>
+                <td>
+                  <% if course.icon? %>
+                    <%= image_tag course.icon.thumb.url, size: '20x20' %>
+                  <% else %>
+                    <%= image_tag "course.png", size: '20x20' %>
+                  <% end %>
+                  <%= course.name %>
+                </td>
+                <td>
+                  <% if course.type_course == true %>
+                    Multichoice
+                  <% elsif course.type_course == false %>
+                    True/False
+                  <% else%>
+                    N/A
+                  <% end %>
+                </td>
+                <td><%= course.subject.name %></td>
+                <td><%= course.questions.all.size %></td>
+                <td style="text-align: right">
+                  <%= link_to 'Xem các câu hỏi', course_questions_path(course), class: 'btn btn-sm btn-default' %>
+                  <% if admin_signed_in? && !current_admin.nil? %>
+                    <%= link_to 'Chỉnh sửa', edit_course_path(course), class: 'btn btn-sm btn-default', data: {toggle: 'modal', target: '#modal'} %>
+                  <% end %>              
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= paginate @courses, theme: 'twitter-bootstrap-4', outer_window: 3 %>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="result_search">Chưa có chủ đề nào<p>
   <% end %>
 </div>
 </section>

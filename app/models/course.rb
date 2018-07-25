@@ -1,13 +1,14 @@
 class Course < ApplicationRecord
     has_many :questions
     belongs_to :subject
+    has_many :exams
 
     mount_uploader :icon, ImageUploader
     validates_processing_of :icon
 
 
     #scope
-    scope :newest, -> { order(created_at: :desc) }
+    scope :newest, -> { order(updated_at: :desc) }
     scope :search_by_name, -> (search_name) { where('name LIKE ?', "%#{search_name}%") }
     
     private

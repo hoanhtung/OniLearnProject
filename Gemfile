@@ -2,6 +2,10 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
+
+gem 'font-awesome-rails'
+
+gem 'simple_token_authentication', '~> 1.0'
 #image
 gem 'carrierwave', '~> 0.10.0'
 gem 'mini_magick', '~> 4.3'

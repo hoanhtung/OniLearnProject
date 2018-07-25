@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Admins::SessionsController < Devise::SessionsController
+  skip_before_action :verify_authenticity_token  
   layout false
   # before_action :configure_sign_in_params, only: [:create]
 

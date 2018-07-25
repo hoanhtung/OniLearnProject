@@ -8,7 +8,12 @@
       <b>Loại:</b>
       <div class='row'>
         <div class='col-xs-12 col-sm-3 col-md-2'>
-          <%= form.select(:type_question, options_for_select([['True', 0], ['False', 1], ['Multichoice', 2]], 2), {}, {class: 'form-control'}) %>
+          <% if @action == 'new' %>
+            <%= form.select(:type_question, options_for_select([['True', 0], ['False', 1], ['Multichoice', 2]], 2), {}, {class: 'form-control'}) %>
+          <% end %>
+          <% if @action == 'edit' %>
+            <%= form.select(:type_question, options_for_select([['True', 0], ['False', 1], ['Multichoice', 2]], "#{question.type_question}"), {}, {class: 'form-control'}) %>
+          <% end %>
         </div>
       </div> 
     </div>
@@ -61,7 +66,7 @@
         <% end %>
       </div>
       <div style="margin-top: 10px">
-        <button type="button" onClick='appendNewAnswerInput()' id="add_answer_btn" class='btn btn-sm btn-success'>  
+        <button type="button" onClick="appendForActionNewAnswer()" id="add_answer_btn" class='btn btn-sm btn-success'>  
             <i class="fa fa-plus"></i>
         </button>
       </div>      

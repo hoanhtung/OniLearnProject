@@ -17,63 +17,67 @@
 <section class="content">   
   <div class="box">
     <div class="box-header with-border">
-        <h3 class="box-title">Danh sách câu hỏi</h3>
-        <% if admin_signed_in? && !current_admin.nil? %>
-          <div class="box-tools pull-right"> 
-            <%= link_to 'Tạo mới', new_course_question_path, class: 'btn btn-sm btn-primary' %>
-          </div>
-        <% end %>
-    </div>
-    <div class="box-body">
-    <table class="table table-consider table-striped">
-    <thead>
-      <tr>
-        <th style="width: 5%">#</th>
-        <th style="width: 30%">Nội dung</th>
-        <th style="width: 25%">Câu trả lời</th>
-        <th style="width: 10%">Loại câu hỏi</th>
-        <th style="width: 30%; text-align: right">Thao tác</th>
-      </tr>
-    </thead>
-  
-    <tbody>
-      <% @questions.each_with_index do |question, index| %>
-        <tr>
-          <td><%= index + 1 %></td>
-          <td><%= question.content %></td>
-          <td>
-            <table style="width: 100%">
-              <% question.answers.each_with_index do |ans, index| %>
-                <tr>
-                    <td>
-                      <% if ans.is_right == true%>
-                        <span style="margin-right: 10px;" class="label label-success"><%= ans.is_right %></span>
-                      <% end %>
-                    </td>
-                    <!--  style="text-align: center; background-color: #41c300; border-radius: 8px" -->
-                    <td style="border-bottom: 1px solid #41c300"><%= ans.content %></td>
-                </tr>
-              <% end %>
-            </table>
-          </td>
-          <td>
-              <% if question.type_question == 2 %>
-                Multichoice
-              <% elsif question.type_question.nil?  %>
-                N/A
-              <%else%>
-                True/False
-              <% end %>
-          </td>
-          <td style="text-align: right">
-            <!-- <%= link_to 'Xem', question_path(question), class: 'btn btn-sm btn-default' %> -->
-            <%= link_to 'Chỉnh sửa', edit_question_path(question), class: 'btn btn-sm btn-default' %>
-            <%= link_to 'Xóa', question, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-default' %>
-          </td>
-        </tr>
+      <h3 class="box-title">Danh sách câu hỏi</h3>
+      <% if admin_signed_in? && !current_admin.nil? %>
+        <div class="box-tools pull-right"> 
+          <%= link_to 'Tạo mới', new_course_question_path, class: 'btn btn-sm btn-primary' %>
+        </div>
       <% end %>
-    </tbody>
-  </table>
     </div>
+    <% if @questions.all.size != 0 %>
+      <div class="box-body">
+        <table class="table table-consider table-striped">
+          <thead>
+            <tr>
+              <th style="width: 5%">#</th>
+              <th style="width: 30%">Nội dung</th>
+              <th style="width: 25%">Câu trả lời</th>
+              <th style="width: 10%">Loại câu hỏi</th>
+              <th style="width: 30%; text-align: right">Thao tác</th>
+            </tr>
+          </thead>
+      
+          <tbody>
+            <% @questions.each_with_index do |question, index| %>
+              <tr>
+                <td><%= index + 1 %></td>
+                <td><%= question.content %></td>
+                <td>
+                  <table style="width: 100%">
+                    <% question.answers.each_with_index do |ans, index| %>
+                      <tr>
+                          <td>
+                            <% if ans.is_right == true%>
+                              <span style="margin-right: 10px; width: 10%; background-color: " class="label label-success"><%= ans.is_right %></span>
+                            <% end %>
+                          </td>
+                          <td style="border-bottom: 1px solid #41c300; ; width: 90%"><%= ans.content %></td>
+                      </tr>
+                    <% end %>
+                  </table>
+                </td>
+                <td>
+                    <% if question.type_question == 2 %>
+                      Multichoice
+                    <% elsif question.type_question.nil?  %>
+                      N/A
+                    <%else%>
+                      True/False
+                    <% end %>
+                </td>
+                <td style="text-align: right">
+                  <!-- <%= link_to 'Xem', question_path(question), class: 'btn btn-sm btn-default' %> -->
+                  <%= link_to 'Chỉnh sửa', edit_question_path(question), class: 'btn btn-sm btn-default' %>
+                  <%= link_to 'Xóa', question, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-default' %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= paginate @questions, theme: 'twitter-bootstrap-4', outer_window: 3 %>
+      </div>
+    <% else %>
+      <p class="result_search">Chưa có câu hỏi nào<p>
+    <% end %>
   </div>
 </section>
